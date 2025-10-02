@@ -178,8 +178,8 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 60
+  far clip plane: 2000
+  field of view: 64
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -205,13 +205,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.34389016, y: -0, z: -0, w: 0.9390099}
-  m_LocalPosition: {x: 0, y: 186, z: -563.6}
+  m_LocalRotation: {x: -0.06551785, y: -0, z: -0, w: 0.99785143}
+  m_LocalPosition: {x: 0, y: 16.3, z: -167.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 40.228, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -7.513, y: 0, z: 0}
 --- !u!114 &330585547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -377,6 +377,81 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 1
+--- !u!1 &449981959
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 449981962}
+  - component: {fileID: 449981961}
+  - component: {fileID: 449981960}
+  m_Layer: 0
+  m_Name: Player
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &449981960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 449981959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76bd5797380590842b4914ab116c5bf3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &449981961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 449981959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: 
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
+--- !u!4 &449981962
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 449981959}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &804994208
 GameObject:
   m_ObjectHideFlags: 0
@@ -386,7 +461,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 804994209}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cannon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -461,6 +536,75 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &961707917
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6214463596157690081, guid: b386d6ff920d2af44b139b27fed51d55, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6214463596157690081, guid: b386d6ff920d2af44b139b27fed51d55, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6214463596157690081, guid: b386d6ff920d2af44b139b27fed51d55, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6214463596157690081, guid: b386d6ff920d2af44b139b27fed51d55, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -57.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6214463596157690081, guid: b386d6ff920d2af44b139b27fed51d55, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 86.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6214463596157690081, guid: b386d6ff920d2af44b139b27fed51d55, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6214463596157690081, guid: b386d6ff920d2af44b139b27fed51d55, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6214463596157690081, guid: b386d6ff920d2af44b139b27fed51d55, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6214463596157690081, guid: b386d6ff920d2af44b139b27fed51d55, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6214463596157690081, guid: b386d6ff920d2af44b139b27fed51d55, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6214463596157690081, guid: b386d6ff920d2af44b139b27fed51d55, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6214463596157690081, guid: b386d6ff920d2af44b139b27fed51d55, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6214463596157690081, guid: b386d6ff920d2af44b139b27fed51d55, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6734540724414659163, guid: b386d6ff920d2af44b139b27fed51d55, type: 3}
+      propertyPath: m_Name
+      value: Proto_Stunt_Course_Ring_Small_01_Atlased
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b386d6ff920d2af44b139b27fed51d55, type: 3}
 --- !u!1 &1291984068
 GameObject:
   m_ObjectHideFlags: 0
@@ -470,7 +614,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1291984069}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -507,7 +651,7 @@ GameObject:
   - component: {fileID: 1554536387}
   - component: {fileID: 1554536386}
   - component: {fileID: 1554536385}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -599,7 +743,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 100, y: 1, z: 100}
+  m_LocalScale: {x: 200, y: 1, z: 200}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -895,8 +1039,8 @@ Transform:
   m_GameObject: {fileID: 6232000556455875225}
   serializedVersion: 2
   m_LocalRotation: {x: -0.5, y: 0.5, z: 0.5, w: 0.5}
-  m_LocalPosition: {x: 0, y: 20.6, z: -458}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 4.14, z: -134.4}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1291984069}
@@ -962,7 +1106,7 @@ GameObject:
   - component: {fileID: 6232000556456808079}
   - component: {fileID: 6232000556457806927}
   - component: {fileID: 6232000556462177327}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Red Decor Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -981,7 +1125,7 @@ GameObject:
   - component: {fileID: 6232000556456808065}
   - component: {fileID: 6232000556457806913}
   - component: {fileID: 6232000556462177313}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Red Decor Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1000,7 +1144,7 @@ GameObject:
   - component: {fileID: 6232000556456808067}
   - component: {fileID: 6232000556457806915}
   - component: {fileID: 6232000556462177315}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Red Decor Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1019,7 +1163,7 @@ GameObject:
   - component: {fileID: 6232000556456808069}
   - component: {fileID: 6232000556457806917}
   - component: {fileID: 6232000556462177317}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Red Decor Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1038,7 +1182,7 @@ GameObject:
   - component: {fileID: 6232000556456808087}
   - component: {fileID: 6232000556457806935}
   - component: {fileID: 6232000556462177335}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pivot Bolt 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1057,7 +1201,7 @@ GameObject:
   - component: {fileID: 6232000556456808073}
   - component: {fileID: 6232000556457806921}
   - component: {fileID: 6232000556462177321}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pivot Bolt 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1076,7 +1220,7 @@ GameObject:
   - component: {fileID: 6232000556456808075}
   - component: {fileID: 6232000556457806923}
   - component: {fileID: 6232000556462177323}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Red Decor Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1095,7 +1239,7 @@ GameObject:
   - component: {fileID: 6232000556456808077}
   - component: {fileID: 6232000556457806925}
   - component: {fileID: 6232000556462177325}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Red Decor Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1114,7 +1258,7 @@ GameObject:
   - component: {fileID: 6232000556456808095}
   - component: {fileID: 6232000556457806943}
   - component: {fileID: 6232000556462177343}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Orange Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1133,7 +1277,7 @@ GameObject:
   - component: {fileID: 6232000556456808081}
   - component: {fileID: 6232000556457806929}
   - component: {fileID: 6232000556462177329}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Yellow Base Decor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1152,7 +1296,7 @@ GameObject:
   - component: {fileID: 6232000556456808083}
   - component: {fileID: 6232000556457806931}
   - component: {fileID: 6232000556462177331}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Red Spike Decor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1171,7 +1315,7 @@ GameObject:
   - component: {fileID: 6232000556456808085}
   - component: {fileID: 6232000556457806933}
   - component: {fileID: 6232000556462177333}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cannon Tube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1187,13 +1331,27 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6232000556455513785}
-  m_Layer: 0
+  - component: {fileID: 6232000556455875226}
+  m_Layer: 6
   m_Name: Cannon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &6232000556455875226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6232000556455875225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fba2ea5296dbc824a95ad17f46faadb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  football: {fileID: 3978156976444542998, guid: a8b1655a90145094bbbfdb3ddd350367, type: 3}
 --- !u!1 &6232000556455875227
 GameObject:
   m_ObjectHideFlags: 0
@@ -1206,7 +1364,7 @@ GameObject:
   - component: {fileID: 6232000556456808089}
   - component: {fileID: 6232000556457806937}
   - component: {fileID: 6232000556462177337}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Black Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1225,7 +1383,7 @@ GameObject:
   - component: {fileID: 6232000556456808091}
   - component: {fileID: 6232000556457806939}
   - component: {fileID: 6232000556462177339}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Fuse
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1244,7 +1402,7 @@ GameObject:
   - component: {fileID: 6232000556456808093}
   - component: {fileID: 6232000556457806941}
   - component: {fileID: 6232000556462177341}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Mouth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1263,7 +1421,7 @@ GameObject:
   - component: {fileID: 6232000556456808191}
   - component: {fileID: 6232000556457807039}
   - component: {fileID: 6232000556462177311}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Red Decor Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1282,7 +1440,7 @@ GameObject:
   - component: {fileID: 6232000556456808177}
   - component: {fileID: 6232000556457807025}
   - component: {fileID: 6232000556462177297}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Red Decor Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1301,7 +1459,7 @@ GameObject:
   - component: {fileID: 6232000556456808071}
   - component: {fileID: 6232000556457806919}
   - component: {fileID: 6232000556462177319}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Red Decor Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1320,7 +1478,7 @@ GameObject:
   - component: {fileID: 6232000556456808185}
   - component: {fileID: 6232000556457807033}
   - component: {fileID: 6232000556462177305}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Red Decor Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1339,7 +1497,7 @@ GameObject:
   - component: {fileID: 6232000556456808187}
   - component: {fileID: 6232000556457807035}
   - component: {fileID: 6232000556462177307}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Red Decor Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1358,7 +1516,7 @@ GameObject:
   - component: {fileID: 6232000556456808189}
   - component: {fileID: 6232000556457807037}
   - component: {fileID: 6232000556462177309}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Red Decor Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2949,3 +3107,5 @@ SceneRoots:
   - {fileID: 832575519}
   - {fileID: 1554536388}
   - {fileID: 6232000556455513785}
+  - {fileID: 961707917}
+  - {fileID: 449981962}
