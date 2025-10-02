@@ -33,10 +33,7 @@ public class FireBall : MonoBehaviour
 
         Debug.Log("Football launched!");
 
-        //Vector3 cannonRotationVector = cannon.transform.rotation.x;
-
         Quaternion cannonRotationQuat = cannon.transform.rotation;
-        //Vector3 cannonRotation = new Vector3(cannonRotationQuat.eulerAngles.y, cannonRotationQuat.eulerAngles.z, cannonRotationQuat.eulerAngles.x);
 
         GameObject ball = Instantiate(football, transform.position, cannonRotationQuat);
 
@@ -45,10 +42,12 @@ public class FireBall : MonoBehaviour
 
         ball.GetComponent<Rigidbody>().AddForce(direction * fireForce, ForceMode.Impulse);
 
-        //Debug.Log(cannonRotationQuat.eulerAngles);
-       // Debug.Log(cannonRotationVector);
-
         activeCooldown = cooldown;
+    }
+
+    public void Turn(float x, float y, float z)
+    {
+        cannon.transform.Rotate(x,y,z);
     }
 
     IEnumerator Cooldown( float seconds )

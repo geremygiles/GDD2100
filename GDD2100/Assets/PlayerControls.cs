@@ -20,4 +20,13 @@ public class PlayerControls : MonoBehaviour
 
         FindFirstObjectByType<FireBall>().Fire();
     }
+
+    void OnMove(UnityEngine.InputSystem.InputValue value)
+    {
+        Vector2 movementVector = value.Get<Vector2>();
+        float x = movementVector.y;
+        float y = movementVector.x;
+
+        FindFirstObjectByType<FireBall>().Turn(x, y, 0);
+    }
 }
