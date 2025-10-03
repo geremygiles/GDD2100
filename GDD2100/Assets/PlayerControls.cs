@@ -35,6 +35,12 @@ public class PlayerControls : MonoBehaviour
         FindFirstObjectByType<FireBall>().ResetRotation();
     }
 
+    void OnQuit()
+    {
+        FindFirstObjectByType<HideMouse>().UnlockCursor();
+        SceneManagerSingleton.Instance.LoadMenu();
+    }
+
     void OnAdjustSensitivity(UnityEngine.InputSystem.InputValue value)
     {
         if (turnSpeed > 1 || value.Get<float>() > 0)

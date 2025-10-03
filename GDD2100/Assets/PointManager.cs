@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using UnityEditor.PackageManager.Requests;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PointManager : MonoBehaviour
 {
@@ -9,6 +11,19 @@ public class PointManager : MonoBehaviour
     public int Points { get; private set; } = 0;
 
     public int Level { get; private set; } = 0;
+
+    private void Awake()
+    {
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            _instance = this;
+            DontDestroyOnLoad(this);
+        }
+    }
 
     public void AddPoints(int points)
     {
@@ -26,6 +41,36 @@ public class PointManager : MonoBehaviour
     {
         Level++;
         InterfaceUpdate.Instance.RefreshUI();
+
+        if (Level >= 3)
+        {
+            FindFirstObjectByType<SceneManagerSingleton>().LoadEndScreen();
+        }
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.buildIndex == 2)
+        {
+            Reset();
+        }
+        else { 
+            FindAnyObjectByType<RingManager>()?.ResetRings();
+        }
+    }
+
+    private void Reset()
+    {
+        BallsFired = 0;
+        Points = 0;
+        Level = 0;
+        InterfaceUpdate.Instance.RefreshUI();
+    }
+
+    private void Start()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        DontDestroyOnLoad(this);
     }
 
     static public PointManager Instance
@@ -35,12 +80,8 @@ public class PointManager : MonoBehaviour
             if (_instance == null)
             {
                 _instance = FindFirstObjectByType<PointManager>();
-                if (_instance == null)
-                {
-                    GameObject go = new GameObject("PointManager");
-                    _instance = go.AddComponent<PointManager>();
-                }
             }
+
             return _instance;
         }
     }

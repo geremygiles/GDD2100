@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class RingManager : MonoBehaviour
 {
@@ -17,6 +18,10 @@ public class RingManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (SceneManager.GetActiveScene().buildIndex != 2)
+        {
+            return;
+        }
         if (transform.childCount == 0)
         {
             while (transform.childCount < numberOfRings)
@@ -24,6 +29,16 @@ public class RingManager : MonoBehaviour
                 SpawnRing();
             }
             PointManager.Instance.IncrementLevel();
+        }
+
+        if (transform.childCount > numberOfRings)
+        {
+            while (transform.childCount > numberOfRings)
+            {
+                Transform child = transform.GetChild(0);
+                Destroy(child.gameObject);
+            }
+            
         }
     }
 
@@ -37,5 +52,13 @@ public class RingManager : MonoBehaviour
         ring.transform.localScale = new Vector3(scale, scale, scale);
 
         ring.transform.LookAt(FindFirstObjectByType<FireBall>().transform);
+    }
+
+    public void ResetRings()
+    {
+        foreach (Transform child in transform)
+        {
+            Destroy(child.gameObject);
+        }
     }
 }
