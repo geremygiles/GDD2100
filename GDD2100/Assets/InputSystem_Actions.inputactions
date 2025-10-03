@@ -32,6 +32,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Adjust Sensitivity",
+                    "type": "Value",
+                    "id": "83fc841e-3354-4595-b23e-897899f0f33e",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -172,7 +181,7 @@
                     "id": "420a77b7-36fc-48ba-838c-0b9b03e2053c",
                     "path": "2DVector(mode=2)",
                     "interactions": "",
-                    "processors": "ScaleVector2(x=0.5,y=0.5)",
+                    "processors": "ScaleVector2(x=0.3,y=0.5)",
                     "groups": "",
                     "action": "Move",
                     "isComposite": true,
@@ -265,6 +274,39 @@
                     "action": "Reset",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "1D Axis",
+                    "id": "ca2ec031-3a80-4b21-87c6-2821f2a2618b",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Adjust Sensitivity",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "8aa6da90-7546-442c-9fb7-5309c6fdc736",
+                    "path": "<Keyboard>/ctrl",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Adjust Sensitivity",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "e3740190-a6f6-4693-ac67-a027de73f8ed",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Adjust Sensitivity",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 }
             ]
         },

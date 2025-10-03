@@ -18,7 +18,7 @@ public class FireBall : MonoBehaviour
 
     private void Start()
     {
-        
+        Invoke(nameof(ResetRotation), .1f);
     }
 
     private void FixedUpdate()
@@ -56,27 +56,13 @@ public class FireBall : MonoBehaviour
             Debug.LogError("Rigidbody component missing from this game object");
         }
 
-        ballRb.AddForce(direction * fireForce * ballRb.mass * 5, ForceMode.Impulse);
+        ballRb.AddForce(5 * ballRb.mass * fireForce * direction, ForceMode.Impulse);
 
         activeCooldown = cooldown;
     }
 
     public void Turn(float x, float y, float z)
     {
-        //cannonBase.transform.Rotate(0, 0, z);
-
-        Debug.Log("x: " + cannon.transform.rotation.eulerAngles.x.ToString());
-        Debug.Log("y: " + cannon.transform.rotation.eulerAngles.y.ToString());
-        Debug.Log("z: " + cannon.transform.rotation.eulerAngles.z.ToString());
-        /*Debug.Log("x: " + cannon.transform.rotation.x.ToString());
-        Debug.Log("y: " + cannon.transform.rotation.y.ToString());
-        Debug.Log("z: " + cannon.transform.rotation.z.ToString());*/
-
-
-        if (cannon.transform.rotation.x > 0)
-        {
-            
-        }
         cannon.transform.Rotate(x,y,z);
     }
 
