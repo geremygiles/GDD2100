@@ -10,6 +10,8 @@ public class FireBall : MonoBehaviour
     [SerializeField] float fireForce = 100.0f;
     [SerializeField] float cooldown = 1.0f;
 
+    [SerializeField] GameObject resetPos;
+
     Rigidbody ballRb;
 
     float activeCooldown = 0.0f;
@@ -63,20 +65,24 @@ public class FireBall : MonoBehaviour
     {
         //cannonBase.transform.Rotate(0, 0, z);
 
-        /*Debug.Log("x: " + cannon.transform.rotation.eulerAngles.x.ToString());
+        Debug.Log("x: " + cannon.transform.rotation.eulerAngles.x.ToString());
         Debug.Log("y: " + cannon.transform.rotation.eulerAngles.y.ToString());
         Debug.Log("z: " + cannon.transform.rotation.eulerAngles.z.ToString());
-        Debug.Log("x: " + cannon.transform.rotation.x.ToString());
+        /*Debug.Log("x: " + cannon.transform.rotation.x.ToString());
         Debug.Log("y: " + cannon.transform.rotation.y.ToString());
         Debug.Log("z: " + cannon.transform.rotation.z.ToString());*/
 
-        Debug.Log("FireDirection position: " + (fireDirection.transform.position - transform.position).ToString());
 
         if (cannon.transform.rotation.x > 0)
         {
             
         }
         cannon.transform.Rotate(x,y,z);
+    }
+
+    public void ResetRotation()
+    {
+        cannon.transform.LookAt(resetPos.transform);
     }
 
     IEnumerator Cooldown( float seconds )

@@ -36,6 +36,11 @@ public class PlayerControls : MonoBehaviour
         turnDirection = value.Get<Vector2>();
     }
 
+    void OnReset()
+    {
+        FindFirstObjectByType<FireBall>().ResetRotation();
+    }
+
     private void TurnCannon()
     {
         float x = turnDirection.x * turnSpeed;
