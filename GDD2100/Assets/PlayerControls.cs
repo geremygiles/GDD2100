@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Xml.Schema;
+using UnityEngine;
 using static UnityEngine.Rendering.DebugUI;
 
 public class PlayerControls : MonoBehaviour
@@ -21,8 +22,6 @@ public class PlayerControls : MonoBehaviour
 
     void OnFire()
     {
-        Debug.Log("Mouse Clicked!");
-
         FindFirstObjectByType<FireBall>().Fire();
     }
 
@@ -38,7 +37,7 @@ public class PlayerControls : MonoBehaviour
 
     void OnAdjustSensitivity(UnityEngine.InputSystem.InputValue value)
     {
-        if (turnSpeed > 1)
+        if (turnSpeed > 1 || value.Get<float>() > 0)
         {
             turnSpeed += value.Get<float>();
         }

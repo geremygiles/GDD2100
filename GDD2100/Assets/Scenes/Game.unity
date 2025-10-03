@@ -1437,6 +1437,7 @@ GameObject:
   - component: {fileID: 1554536387}
   - component: {fileID: 1554536386}
   - component: {fileID: 1554536385}
+  - component: {fileID: 1554536389}
   m_Layer: 8
   m_Name: Ground
   m_TagString: Untagged
@@ -1534,6 +1535,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1554536389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1554536384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 468a04003bc25c34ba5c375386bcf110, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1607202971
 GameObject:
   m_ObjectHideFlags: 0
@@ -1758,6 +1771,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UIText:
   - {fileID: 1228628777}
+  - {fileID: 1384573808}
+  - {fileID: 613130239}
+  - {fileID: 216431226}
   - {fileID: 633542844}
 --- !u!114 &1869293551
 MonoBehaviour:
@@ -1838,8 +1854,8 @@ RectTransform:
   - {fileID: 1384573807}
   - {fileID: 613130238}
   - {fileID: 216431225}
-  - {fileID: 1496833275}
   - {fileID: 633542843}
+  - {fileID: 1496833275}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}

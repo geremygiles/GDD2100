@@ -23,12 +23,12 @@ public class RingManager : MonoBehaviour
             {
                 SpawnRing();
             }
+            PointManager.Instance.IncrementLevel();
         }
     }
 
     private void SpawnRing()
     {
-        Debug.Log("Spawning new ring");
         // Instantiate a new ring at a random position above the ground
         Vector3 position = new Vector3(Random.Range(minX, maxX), Random.Range(minY, maxY), Random.Range(minZ, maxZ));
 

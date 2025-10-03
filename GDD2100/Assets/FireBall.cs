@@ -18,7 +18,7 @@ public class FireBall : MonoBehaviour
 
     private void Start()
     {
-        Invoke(nameof(ResetRotation), .1f);
+        Invoke(nameof(ResetRotation), .2f);
     }
 
     private void FixedUpdate()
@@ -41,8 +41,6 @@ public class FireBall : MonoBehaviour
             return;
         }
 
-        Debug.Log("Football launched!");
-
         Quaternion cannonRotationQuat = cannon.transform.rotation;
 
         GameObject ball = Instantiate(football, transform.position, cannonRotationQuat);
@@ -59,6 +57,8 @@ public class FireBall : MonoBehaviour
         ballRb.AddForce(5 * ballRb.mass * fireForce * direction, ForceMode.Impulse);
 
         activeCooldown = cooldown;
+
+        PointManager.Instance.IncrementBalls();
     }
 
     public void Turn(float x, float y, float z)
