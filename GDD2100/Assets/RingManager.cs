@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class RingManager : MonoBehaviour
 {
-    [SerializeField] int numberOfRings = 5;
+    [SerializeField] int numberOfRingsPerLevel = 5;
     [SerializeField] GameObject ringPrefab;
     [SerializeField] float minX = -100.0f;
     [SerializeField] float maxX = 100.0f;
@@ -24,16 +24,16 @@ public class RingManager : MonoBehaviour
         }
         if (transform.childCount == 0)
         {
-            while (transform.childCount < numberOfRings)
+            while (transform.childCount < numberOfRingsPerLevel)
             {
                 SpawnRing();
             }
             PointManager.Instance.IncrementLevel();
         }
 
-        if (transform.childCount > numberOfRings)
+        if (transform.childCount > numberOfRingsPerLevel)
         {
-            while (transform.childCount > numberOfRings)
+            while (transform.childCount > numberOfRingsPerLevel)
             {
                 Transform child = transform.GetChild(0);
                 Destroy(child.gameObject);

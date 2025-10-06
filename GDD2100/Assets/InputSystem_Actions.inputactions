@@ -836,7 +836,7 @@
                 {
                     "name": "",
                     "id": "345a5a1c-6585-4766-b7e9-25334e7dcb4d",
-                    "path": "<Keyboard>/delete",
+                    "path": "<Keyboard>/escape",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse;Gamepad",

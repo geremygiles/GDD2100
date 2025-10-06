@@ -20,7 +20,7 @@ public class InterfaceUpdate : MonoBehaviour
             switch (textElement.name)
             {
                 case "ScoreText":
-                    textElement.text = "Score: " + PointManager.Instance.Points.ToString();
+                    textElement.text = "Rings Remaining: " + ((PointManager.Instance.NumOfLevels * PointManager.Instance.Rings) - PointManager.Instance.Points);
                     break;
                 case "TurnSpeedText":
                     PlayerControls playerControls = FindFirstObjectByType<PlayerControls>();
@@ -51,9 +51,22 @@ public class InterfaceUpdate : MonoBehaviour
                     else if (accuracy >= 70) grade = "C";
                     else if (accuracy >= 60) grade = "D";
                     textElement.text = "Grade: " + grade;
+
+                    if (accuracy < 70)
+                    {
+                        ShowShootingLine(true);
+                    }
+                    else
+                    {
+                        ShowShootingLine(false);
+                    }
+
                     break;
                 case "LevelText":
                     textElement.text = "Level: " + pointManager.Level;
+                    break;
+                case "BallsText":
+                    textElement.text = "Balls Fired: " + pointManager.BallsFired;
                     break;
                 default:
                     Debug.LogWarning("Unknown UI element: " + textElement.name);
@@ -66,6 +79,10 @@ public class InterfaceUpdate : MonoBehaviour
 
     public void ShowShootingLine(bool status)
     {
+        if (shootingLine == null)
+        {
+            return;
+        }
         if (shootingLine.enabled != status)
         {
             shootingLine.enabled = status;

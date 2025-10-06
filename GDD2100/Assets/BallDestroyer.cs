@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,11 +8,13 @@ public class BallDestroyer : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Destroy(collision.gameObject);
+        StartCoroutine(DestroyBall(collision.gameObject));
+        InterfaceUpdate.Instance.RefreshUI();
     }
 
-    private void DestroyBall()
+    private IEnumerator DestroyBall(GameObject ball)
     {
-        Destroy(gameObject);
+        yield return new WaitForSeconds(2.0f);
+        Destroy(ball);
     }
 }

@@ -53,8 +53,11 @@ public class PlayerControls : MonoBehaviour
 
     private void TurnCannon()
     {
-        float x = turnDirection.x * turnSpeed * Time.deltaTime * 10;
-        float y = turnDirection.y * turnSpeed * Time.deltaTime * 10;
+        //float x = turnDirection.x * turnSpeed * Time.deltaTime * 10;
+        //float y = turnDirection.y * turnSpeed * Time.deltaTime * 10;
+
+        float x = turnDirection.x * turnSpeed / 25;
+        float y = turnDirection.y * turnSpeed / 25;
 
         FireBall cannon = FindFirstObjectByType<FireBall>();
 

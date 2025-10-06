@@ -11,6 +11,10 @@ public class PointManager : MonoBehaviour
 
     public int Level { get; private set; } = 0;
 
+    public int Rings { get; private set; } = 5;
+
+    public int NumOfLevels { get; private set; } = 10;
+
     private void Awake()
     {
         if (_instance != null && _instance != this)
@@ -33,16 +37,6 @@ public class PointManager : MonoBehaviour
     public void IncrementBalls()
     {
         BallsFired++;
-        InterfaceUpdate.Instance.RefreshUI();
-
-        if ((float)Points / (float)BallsFired < 0.7)
-        {
-            InterfaceUpdate.Instance.ShowShootingLine(true);
-        }
-        else
-        {
-            InterfaceUpdate.Instance.ShowShootingLine(false);
-        }
     }
 
     public void IncrementLevel()
@@ -50,7 +44,7 @@ public class PointManager : MonoBehaviour
         Level++;
         InterfaceUpdate.Instance.RefreshUI();
 
-        if (Level >= 10)
+        if (Level > NumOfLevels)
         {
             FindFirstObjectByType<SceneManagerSingleton>().LoadEndScreen();
         }
