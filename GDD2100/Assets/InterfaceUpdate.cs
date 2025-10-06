@@ -5,6 +5,7 @@ public class InterfaceUpdate : MonoBehaviour
     static InterfaceUpdate _instance;
 
     [SerializeField] TMPro.TMP_Text[] UIText;
+    [SerializeField] LineRenderer shootingLine;
 
     private void Start()
     {
@@ -61,6 +62,14 @@ public class InterfaceUpdate : MonoBehaviour
         }
 
         Debug.Log("User interface updated.");
+    }
+
+    public void ShowShootingLine(bool status)
+    {
+        if (shootingLine.enabled != status)
+        {
+            shootingLine.enabled = status;
+        }
     }
 
     static public InterfaceUpdate Instance

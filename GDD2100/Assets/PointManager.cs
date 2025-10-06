@@ -1,5 +1,4 @@
-﻿using UnityEditor.PackageManager.Requests;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PointManager : MonoBehaviour
@@ -35,6 +34,15 @@ public class PointManager : MonoBehaviour
     {
         BallsFired++;
         InterfaceUpdate.Instance.RefreshUI();
+
+        if ((float)Points / (float)BallsFired < 0.7)
+        {
+            InterfaceUpdate.Instance.ShowShootingLine(true);
+        }
+        else
+        {
+            InterfaceUpdate.Instance.ShowShootingLine(false);
+        }
     }
 
     public void IncrementLevel()
