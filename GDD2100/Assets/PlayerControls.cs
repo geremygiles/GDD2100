@@ -7,11 +7,12 @@ public class PlayerControls : MonoBehaviour
     [SerializeField] float turnSpeed = 1.0f;
     public float TurnSpeed { get { return turnSpeed; } }
     Vector2 turnDirection = Vector2.zero;
+    FireDirectionPoint fdp;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        fdp = FindFirstObjectByType<FireDirectionPoint>();
     }
 
     // Update is called once per frame
@@ -56,7 +57,7 @@ public class PlayerControls : MonoBehaviour
         FindFirstObjectByType<CameraController>().ToggleZoom();
     }
 
-    private void TurnCannon()
+    private void TurnCannon2()
     {
         //float x = turnDirection.x * turnSpeed * Time.deltaTime * 10;
         //float y = turnDirection.y * turnSpeed * Time.deltaTime * 10;
@@ -68,6 +69,16 @@ public class PlayerControls : MonoBehaviour
 
 
 
-        cannon.Turn(0, y, x);
+        //cannon.Turn(0, y, x);
+    }
+
+    private void TurnCannon()
+    {
+        float x = turnDirection.x * turnSpeed / 25;
+        float y = turnDirection.y * turnSpeed / 25;
+
+        Vector3 movementDelta = new Vector3(x, y, 0);
+
+        fdp.Move(movementDelta);
     }
 }

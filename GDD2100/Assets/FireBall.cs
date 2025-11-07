@@ -5,7 +5,6 @@ public class FireBall : MonoBehaviour
 {
     [SerializeField] GameObject football;
     [SerializeField] GameObject cannon;
-    [SerializeField] GameObject cannonBase;
     [SerializeField] GameObject fireDirection;
     [SerializeField] float fireForce = 100.0f;
     [SerializeField] float cooldown = 1.0f;
@@ -18,7 +17,7 @@ public class FireBall : MonoBehaviour
 
     private void Start()
     {
-        Invoke(nameof(ResetRotation), .2f);
+        //Invoke(nameof(ResetRotation), .2f);
     }
 
     private void FixedUpdate()
@@ -54,17 +53,17 @@ public class FireBall : MonoBehaviour
             Debug.LogError("Rigidbody component missing from this game object");
         }
 
-        ballRb.AddForce(5 * ballRb.mass * fireForce * direction, ForceMode.Impulse);
+        ballRb.AddForce(50 * ballRb.mass * fireForce * (direction.normalized), ForceMode.Impulse);
 
         activeCooldown = cooldown;
 
         PointManager.Instance.IncrementBalls();
     }
 
-    public void Turn(float x, float y, float z)
+    /*public void Turn(float x, float y, float z)
     {
         cannon.transform.Rotate(x,y,z);
-    }
+    }*/
 
     public void ResetRotation()
     {
