@@ -41,6 +41,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Zoom Toggle",
+                    "type": "Button",
+                    "id": "1ae175c1-c24f-47c6-8e89-894eb6c2281b",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -307,6 +316,17 @@
                     "action": "Adjust Sensitivity",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "d17eec95-4f12-4914-93f4-53ea955a28f9",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Zoom Toggle",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },

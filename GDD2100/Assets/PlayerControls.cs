@@ -51,6 +51,11 @@ public class PlayerControls : MonoBehaviour
         InterfaceUpdate.Instance.RefreshUI();
     }
 
+    void OnZoomToggle()
+    {
+        FindFirstObjectByType<CameraController>().ToggleZoom();
+    }
+
     private void TurnCannon()
     {
         //float x = turnDirection.x * turnSpeed * Time.deltaTime * 10;
