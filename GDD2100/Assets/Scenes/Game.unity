@@ -494,6 +494,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   standardCamera: {fileID: 1231302873}
   zoomedCamera: {fileID: 1040247862}
+  crosshair: {fileID: 1940581980}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -1562,7 +1563,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1356885413}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -1803,12 +1804,12 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'ESC - Quit
 
-    R - Reset Cannon
+    Q - Zoom (First-Person Mode)
 
-    Shift - Increase Turn Sensitivity
+    Shift - Increase Turn
+    Sensitivity
 
-    Ctrl
-    - Decrease Sensitivity'
+    Ctrl - Decrease Sensitivity'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2478,7 +2479,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1940581981
 Transform:
   m_ObjectHideFlags: 0
