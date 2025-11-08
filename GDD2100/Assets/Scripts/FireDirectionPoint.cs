@@ -25,7 +25,7 @@ public class FireDirectionPoint : MonoBehaviour
     {
         position = transform.position;
         position.x = Mathf.Clamp(position.x, -200f, 200f);
-        position.y = Mathf.Clamp(position.y, 0f, 150f);
+        position.y = Mathf.Clamp(position.y, 0f, 200f);
         position.z = 0f;
         transform.position = position;
     }
