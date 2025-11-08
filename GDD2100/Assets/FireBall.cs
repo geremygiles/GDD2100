@@ -43,6 +43,7 @@ public class FireBall : MonoBehaviour
         Quaternion cannonRotationQuat = cannon.transform.rotation;
 
         GameObject ball = Instantiate(football, transform.position, cannonRotationQuat);
+        ball.transform.Rotate(0, 90, 0);
 
         // Vector of position difference from spawn point to fireDirection
         Vector3 direction = fireDirection.transform.position - transform.position;
