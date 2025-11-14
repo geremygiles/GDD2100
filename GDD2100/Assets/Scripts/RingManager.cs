@@ -14,6 +14,8 @@ public class RingManager : MonoBehaviour
     [SerializeField] float minScale = 5.0f;
     [SerializeField] float maxScale = 25.0f;
 
+    public DifficultySelector difficultySelector;
+
 
     // Update is called once per frame
     void Update()
@@ -59,6 +61,48 @@ public class RingManager : MonoBehaviour
         foreach (Transform child in transform)
         {
             Destroy(child.gameObject);
+        }
+    }
+
+    public void ChangeRange(float newMinZ, float newMaxZ)
+    {
+        minZ = newMinZ;
+        maxZ = newMaxZ;
+        ResetRings();
+    }
+
+    private void OnEnable()
+    {
+        difficultySelector = FindFirstObjectByType<DifficultySelector>();
+        difficultySelector.OnDifficultyChanged.AddListener(HandleDifficultyChange);
+    }
+
+
+    private void OnDisable()
+    {
+        difficultySelector.OnDifficultyChanged.RemoveListener(HandleDifficultyChange);
+    }
+
+    private void HandleDifficultyChange(DifficultySelector.DifficultyLevel level)
+    {
+        Debug.Log("Difficulty changed to: " + level.ToString());
+        switch (level)
+        {
+            case DifficultySelector.DifficultyLevel.Easy:
+                ChangeRange(-50.0f, -25.0f);
+                break;
+            case DifficultySelector.DifficultyLevel.Normal:
+                ChangeRange(-50.0f, 50.0f);
+                break;
+            case DifficultySelector.DifficultyLevel.Hard:
+                ChangeRange(25f, 75.0f);
+                break;
+            case DifficultySelector.DifficultyLevel.Impossible:
+                ChangeRange(50f, 100.0f);
+                break;
+            default:
+                Debug.Log("Unknown difficulty level");
+                break;
         }
     }
 }
