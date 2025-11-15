@@ -44,7 +44,7 @@ public class PointManager : MonoBehaviour
         Level++;
         InterfaceUpdate.Instance.RefreshUI();
 
-        if (Level > NumOfLevels)
+        if (Level >= NumOfLevels)
         {
             FindFirstObjectByType<SceneManagerSingleton>().LoadEndScreen();
         }

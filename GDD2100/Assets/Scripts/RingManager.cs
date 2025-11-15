@@ -30,7 +30,11 @@ public class RingManager : MonoBehaviour
             {
                 SpawnRing();
             }
-            PointManager.Instance.IncrementLevel();
+
+            if ( PointManager.Instance.Points > numberOfRingsPerLevel * PointManager.Instance.Level)
+            {
+                PointManager.Instance.IncrementLevel();
+            }
         }
 
         if (transform.childCount > numberOfRingsPerLevel)
@@ -62,6 +66,8 @@ public class RingManager : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
+
+        PointManager.Instance.AddPoints(-(PointManager.Instance.Points % numberOfRingsPerLevel));
     }
 
     public void ChangeRange(float newMinZ, float newMaxZ)

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class PauseManager : MonoBehaviour
 {
@@ -12,6 +13,18 @@ public class PauseManager : MonoBehaviour
     public UnityEvent<bool> OnPauseToggled;
 
     private void Start()
+    {
+        LoadPauseMenu();
+        SceneManager.sceneLoaded += LoadPauseMenu;
+    }
+
+    private void LoadPauseMenu(Scene scene, LoadSceneMode mode)
+    {
+        PauseMenu = Instantiate(pauseMenuPrefab, FindFirstObjectByType<Canvas>().transform);
+        PauseMenu.SetActive(false);
+    }
+
+    private void LoadPauseMenu()
     {
         PauseMenu = Instantiate(pauseMenuPrefab, FindFirstObjectByType<Canvas>().transform);
         PauseMenu.SetActive(false);
