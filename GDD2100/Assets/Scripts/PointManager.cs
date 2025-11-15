@@ -32,6 +32,10 @@ public class PointManager : MonoBehaviour
     {
         Points += points;
         InterfaceUpdate.Instance.RefreshUI();
+
+        if (points <= 0) return;
+        AudioClip scoreSound = FindFirstObjectByType<AudioManager>().audioClips[1];
+        FindFirstObjectByType<AudioManager>().PlayAudio(scoreSound);
     }
 
     public void IncrementBalls()

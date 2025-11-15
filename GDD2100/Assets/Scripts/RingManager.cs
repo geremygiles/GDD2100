@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class RingManager : MonoBehaviour
@@ -13,6 +14,7 @@ public class RingManager : MonoBehaviour
     [SerializeField] float maxY = 100.0f;
     [SerializeField] float minScale = 5.0f;
     [SerializeField] float maxScale = 25.0f;
+    public float timedResetDelay = 10.0f;
 
     public DifficultySelector difficultySelector;
 
@@ -31,9 +33,14 @@ public class RingManager : MonoBehaviour
                 SpawnRing();
             }
 
-            if ( PointManager.Instance.Points > numberOfRingsPerLevel * PointManager.Instance.Level)
+            if (PointManager.Instance.Points > numberOfRingsPerLevel * PointManager.Instance.Level)
             {
                 PointManager.Instance.IncrementLevel();
+                StopAllCoroutines();
+                if (difficultySelector.CurrentDifficulty == DifficultySelector.DifficultyLevel.Impossible)
+                {
+                    StartCoroutine(TimedReset(timedResetDelay));
+                }
             }
         }
 
@@ -70,6 +77,13 @@ public class RingManager : MonoBehaviour
         PointManager.Instance.AddPoints(-(PointManager.Instance.Points % numberOfRingsPerLevel));
     }
 
+    IEnumerator TimedReset(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        ResetRings();
+        StartCoroutine(TimedReset(delay));
+    }
+
     public void ChangeRange(float newMinZ, float newMaxZ)
     {
         minZ = newMinZ;
@@ -91,6 +105,7 @@ public class RingManager : MonoBehaviour
 
     private void HandleDifficultyChange(DifficultySelector.DifficultyLevel level)
     {
+        StopAllCoroutines();
         Debug.Log("Difficulty changed to: " + level.ToString());
         switch (level)
         {
@@ -105,6 +120,7 @@ public class RingManager : MonoBehaviour
                 break;
             case DifficultySelector.DifficultyLevel.Impossible:
                 ChangeRange(50f, 100.0f);
+                StartCoroutine(TimedReset(timedResetDelay));
                 break;
             default:
                 Debug.Log("Unknown difficulty level");

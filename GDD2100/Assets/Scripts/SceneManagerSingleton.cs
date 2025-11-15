@@ -69,12 +69,10 @@ public class SceneManagerSingleton : MonoBehaviour
     {
         foreach (Button button in FindObjectsByType<Button>(0))
         {
-            Debug.Log(button.name);
             switch (button.name)
             {
                 case "Start Button":
                     button.onClick.AddListener(StartGame);
-                    Debug.Log("Start Button Found");
                     break;
                 case "Instructions Button":
                     button.onClick.AddListener(LoadInstructions);

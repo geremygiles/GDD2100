@@ -59,6 +59,9 @@ public class FireBall : MonoBehaviour
         activeCooldown = cooldown;
 
         PointManager.Instance.IncrementBalls();
+
+        AudioClip shootSound = FindFirstObjectByType<AudioManager>().audioClips[0];
+        FindFirstObjectByType<AudioManager>().PlayAudio(shootSound);
     }
 
     /*public void Turn(float x, float y, float z)

@@ -20,18 +20,36 @@ public class PauseManager : MonoBehaviour
 
     private void LoadPauseMenu(Scene scene, LoadSceneMode mode)
     {
-        PauseMenu = Instantiate(pauseMenuPrefab, FindFirstObjectByType<Canvas>().transform);
-        PauseMenu.SetActive(false);
+        LoadPauseMenu();
     }
 
     private void LoadPauseMenu()
     {
+        if (PauseMenu != null)
+        {
+            Destroy(PauseMenu);
+        }
+
+        if (SceneManager.GetActiveScene().buildIndex != 2)
+        {
+            return; // No pause menu in main menu or instructions scene
+        }
+
+        IsPaused = false;
+        Time.timeScale = IsPaused ? 0f : 1f;
+        OnPauseToggled?.Invoke(IsPaused);
+
         PauseMenu = Instantiate(pauseMenuPrefab, FindFirstObjectByType<Canvas>().transform);
         PauseMenu.SetActive(false);
     }
 
     public void TogglePause()
     {
+        if (PauseMenu == null)
+        {
+            LoadPauseMenu();
+        }
+
         IsPaused = !IsPaused;
         Time.timeScale = IsPaused ? 0f : 1f;
         PauseMenu.SetActive(IsPaused);

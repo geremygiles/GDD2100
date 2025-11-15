@@ -13,7 +13,7 @@ public class DifficultySelector : MonoBehaviour
         Impossible,
     }
 
-    private DifficultyLevel difficultyLevel;
+    private DifficultyLevel difficultyLevel = DifficultyLevel.Normal;
 
     public DifficultyLevel CurrentDifficulty
     {
@@ -41,7 +41,6 @@ public class DifficultySelector : MonoBehaviour
         switch (difficultyLevel)
         {
             case DifficultyLevel.Easy:
-                Debug.Log("Difficulty set to Easy");
                 difficultyDescriptionText.text = "Rings will appear closer to the cannon and the aim assist will always be active.";
                 break;
             case DifficultyLevel.Normal:
@@ -51,7 +50,7 @@ public class DifficultySelector : MonoBehaviour
                 difficultyDescriptionText.text = "Rings will appear far away from the cannon and the aim assist will never activate.";
                 break;
             case DifficultyLevel.Impossible:
-                difficultyDescriptionText.text = "Rings will appear very far away from the cannon and the level will reset after 20 seconds.";
+                difficultyDescriptionText.text = "Rings will appear very far away from the cannon and the level will reset after every " + (int)FindFirstObjectByType<RingManager>().timedResetDelay + " seconds.";
                 break;
             default:
                 Debug.Log("Unknown difficulty level");
