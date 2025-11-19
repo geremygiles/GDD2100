@@ -49,7 +49,6 @@ public class InterfaceUpdate : MonoBehaviour
                     textElement.text = "Grade: " + grade;
 
 
-                    Debug.Log(FindAnyObjectByType<DifficultySelector>().CurrentDifficulty);
                     switch (FindAnyObjectByType<DifficultySelector>().CurrentDifficulty)
                     {
                         case DifficultySelector.DifficultyLevel.Easy:

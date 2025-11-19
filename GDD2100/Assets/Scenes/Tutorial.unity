@@ -130,8 +130,8 @@ GameObject:
   - component: {fileID: 48951884}
   - component: {fileID: 48951883}
   - component: {fileID: 48951882}
-  - component: {fileID: 48951881}
   - component: {fileID: 48951885}
+  - component: {fileID: 48951886}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -139,23 +139,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &48951881
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 48951880}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
 --- !u!114 &48951882
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -197,7 +180,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -236,6 +219,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   focusPointPrefab: {fileID: 4376963621542338369, guid: 591adec540eb627458b670a3035e1844, type: 3}
   darkBackground: {fileID: 1769723242}
+  tutorialTextPrefab: {fileID: 5277884144989816525, guid: b97a5d4bcc46ca64083fe8a4be58995c, type: 3}
+  tutorialStates:
+  - {fileID: 11400000, guid: 4ee4efaa9828dd34eb3ea151305b0aba, type: 2}
+  - {fileID: 11400000, guid: 781928d74705d3a429d600646ba00e68, type: 2}
+  - {fileID: 11400000, guid: d28be61b99cd9264581950bf6931208b, type: 2}
+  - {fileID: 11400000, guid: ed4cf50aa622a9345a9359bbb8f7af78, type: 2}
+  tutorialActive: 1
+--- !u!225 &48951886
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 48951880}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &1769723242
 GameObject:
   m_ObjectHideFlags: 0

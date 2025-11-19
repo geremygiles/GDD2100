@@ -86,6 +86,23 @@ public class PlayerControls : MonoBehaviour
         FindFirstObjectByType<CameraController>().ToggleZoom();
     }
 
+    void OnClick()
+    {
+        Debug.Log("Click detected");
+        try 
+        {
+            TutorialManager tutorialManager = FindFirstObjectByType<TutorialManager>();
+            if (tutorialManager.tutorialActive)
+            {
+                tutorialManager.AdvanceTutorial();
+            }
+        }
+        catch
+        {
+            // No tutorial manager found, do nothing
+        }
+    }
+
     private void TurnCannon()
     {
         if (!canMove) return;
