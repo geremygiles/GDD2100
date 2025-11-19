@@ -14,6 +14,12 @@ public class SceneManagerSingleton : MonoBehaviour
         }
     }
 
+    private void LoadTutorial()
+    {
+        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(4, LoadSceneMode.Additive);
+    }
+
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -76,6 +82,9 @@ public class SceneManagerSingleton : MonoBehaviour
                     break;
                 case "Instructions Button":
                     button.onClick.AddListener(LoadInstructions);
+                    break;
+                case "Tutorial Button":
+                    button.onClick.AddListener(LoadTutorial);
                     break;
                 case "Menu Button":
                     button.onClick.AddListener(LoadMenu);
