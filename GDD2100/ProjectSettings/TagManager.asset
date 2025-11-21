@@ -10,6 +10,7 @@ TagManager:
   - ProgressUI
   - GradeUI
   - TurnUI
+  - PauseMenu
   layers:
   - Default
   - TransparentFX

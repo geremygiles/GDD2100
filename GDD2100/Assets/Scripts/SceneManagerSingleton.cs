@@ -46,7 +46,11 @@ public class SceneManagerSingleton : MonoBehaviour
 
     public void LoadMenu()
     {
-        FindFirstObjectByType<HideMouse>().UnlockCursor();
+        HideMouse hideMouse = FindFirstObjectByType<HideMouse>();
+        if (hideMouse != null)
+        {
+            hideMouse.UnlockCursor();
+        }
         SceneManager.LoadScene(0);
     }
 
@@ -64,13 +68,21 @@ public class SceneManagerSingleton : MonoBehaviour
 
     public void QuitApplication()
     {
-        FindFirstObjectByType<HideMouse>().UnlockCursor();
+        HideMouse hideMouse = FindFirstObjectByType<HideMouse>();
+        if (hideMouse != null)
+        {
+            hideMouse.UnlockCursor();
+        }
         Application.Quit();
     }
 
     public void LoadEndScreen()
     {
-        FindFirstObjectByType<HideMouse>().UnlockCursor();
+        HideMouse hideMouse = FindFirstObjectByType<HideMouse>();
+        if (hideMouse != null)
+        {
+            hideMouse.UnlockCursor();
+        }
         SceneManager.LoadScene(3);
     }
 

@@ -12,6 +12,7 @@ public class PlayerControls : MonoBehaviour
     GameObject gameManager;
     public bool canMove = true;
     public bool canFire = true;
+    public bool canPause = true;
     public PauseManager pauseManager;
     public UnityEvent ClickDetected;
 
@@ -39,7 +40,7 @@ public class PlayerControls : MonoBehaviour
         pauseManager.OnPauseToggled.RemoveListener(HandlePauseToggle);
     }
 
-    private void HandlePauseToggle(bool isPaused)
+    private void HandlePauseToggle(bool isPaused, bool visible)
     {
         canMove = !isPaused;
     }
@@ -69,6 +70,7 @@ public class PlayerControls : MonoBehaviour
 
     void OnPause()
     {
+        if (!canPause) return;
         gameManager.GetComponent<PauseManager>().TogglePause(true);
     }
 

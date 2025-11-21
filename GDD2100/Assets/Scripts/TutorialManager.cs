@@ -42,48 +42,7 @@ public class TutorialManager : MonoBehaviour
         tutorialStates = Resources.LoadAll<TutorialState>("Tutorial States");
         Debug.Log("Loaded " + tutorialStates.Length + " tutorial states.");
     }
-
-    private GameObject AddFocusPoint(float x, float y, float radius)
-    {
-        Image focusPoint = Instantiate(focusPointPrefab, transform);
-        focusPoint.transform.position = new Vector3(x, y, 0);
-        focusPoint.rectTransform.sizeDelta = new Vector2(radius, radius);
-        darkBackground.transform.SetAsFirstSibling();
-        focusPoint.transform.SetAsFirstSibling();
-        
-        return focusPoint.gameObject;
-    }
-
-    private GameObject AddFocusPoint(float radius)
-    {
-        Vector3 screenPos = Vector3.zero;
-        switch (tutorialStates[currentStateIndex].focusTarget)
-        {
-            case FocusTarget.Cannon:
-                {
-                    screenPos = Camera.main.WorldToScreenPoint(FindFirstObjectByType<FireBall>().transform.position);
-                    RectTransform rectTransform = gameObject.GetComponent<RectTransform>();
-                    break;
-                }
-            case FocusTarget.Target:
-                {
-                    screenPos = Camera.main.WorldToScreenPoint(FindFirstObjectByType<CollisionCheck>().transform.position);
-                    RectTransform rectTransform = gameObject.GetComponent<RectTransform>();
-                    Debug.Log("Target screen position: " + screenPos);
-                    break;
-                }
-            case FocusTarget.UIElement:
-                {
-                    screenPos = GameObject.FindGameObjectWithTag(tutorialStates[currentStateIndex].uiElement.ToString()).GetComponent<RectTransform>().position;
-                    screenPos += new Vector3(tutorialStates[currentStateIndex].focusPointOffset.x, tutorialStates[currentStateIndex].focusPointOffset.y);
-                    break;
-                }
-            default:
-                Debug.LogWarning("Unknown focus target.");
-                break;
-        }
-        return AddFocusPoint(screenPos.x, screenPos.y, radius);
-    }
+    
 
     private void LoadState()
     {
@@ -165,6 +124,48 @@ public class TutorialManager : MonoBehaviour
                 currentUIElements.Add(focusPointObject);
             }
         }
+    }
+
+    private GameObject AddFocusPoint(float x, float y, float radius)
+    {
+        Image focusPoint = Instantiate(focusPointPrefab, transform);
+        focusPoint.transform.position = new Vector3(x, y, 0);
+        focusPoint.rectTransform.sizeDelta = new Vector2(radius, radius);
+        darkBackground.transform.SetAsFirstSibling();
+        focusPoint.transform.SetAsFirstSibling();
+
+        return focusPoint.gameObject;
+    }
+
+    private GameObject AddFocusPoint(float radius)
+    {
+        Vector3 screenPos = Vector3.zero;
+        switch (tutorialStates[currentStateIndex].focusTarget)
+        {
+            case FocusTarget.Cannon:
+                {
+                    screenPos = Camera.main.WorldToScreenPoint(FindFirstObjectByType<FireBall>().transform.position);
+                    RectTransform rectTransform = gameObject.GetComponent<RectTransform>();
+                    break;
+                }
+            case FocusTarget.Target:
+                {
+                    screenPos = Camera.main.WorldToScreenPoint(FindFirstObjectByType<CollisionCheck>().transform.position);
+                    RectTransform rectTransform = gameObject.GetComponent<RectTransform>();
+                    Debug.Log("Target screen position: " + screenPos);
+                    break;
+                }
+            case FocusTarget.UIElement:
+                {
+                    screenPos = GameObject.FindGameObjectWithTag(tutorialStates[currentStateIndex].uiElement.ToString()).GetComponent<RectTransform>().position;
+                    screenPos += new Vector3(tutorialStates[currentStateIndex].focusPointOffset.x, tutorialStates[currentStateIndex].focusPointOffset.y);
+                    break;
+                }
+            default:
+                Debug.LogWarning("Unknown focus target.");
+                break;
+        }
+        return AddFocusPoint(screenPos.x, screenPos.y, radius);
     }
 
     private void ClearUI()

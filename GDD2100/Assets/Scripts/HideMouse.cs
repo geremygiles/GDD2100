@@ -35,9 +35,9 @@ public class HideMouse : MonoBehaviour
         pauseManager.OnPauseToggled.RemoveListener(HandlePauseToggle);
     }
 
-    private void HandlePauseToggle(bool isPaused)
+    private void HandlePauseToggle(bool isPaused, bool visible)
     {
-        if (isPaused)
+        if (isPaused && visible)
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
