@@ -18,6 +18,7 @@ public enum AdvanceAction
 public class TutorialState : ScriptableObject
 {
     public StateLoadMode loadMode;
+    public float delay = 0f;
     public AdvanceAction advanceAction;
     public bool allowMovement = false;
     [Header ("Text Settings")]
