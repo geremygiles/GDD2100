@@ -7,6 +7,9 @@ TagManager:
   - PauseMenuButton
   - MainMenuButton
   - CC
+  - ProgressUI
+  - GradeUI
+  - TurnUI
   layers:
   - Default
   - TransparentFX

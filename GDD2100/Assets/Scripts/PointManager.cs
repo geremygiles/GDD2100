@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 public class PointManager : MonoBehaviour
@@ -14,6 +15,8 @@ public class PointManager : MonoBehaviour
     public int Rings { get; private set; } = 5;
 
     public int NumOfLevels { get; private set; } = 10;
+
+    public UnityEvent OnScorePoint;
 
     private void Awake()
     {
@@ -36,6 +39,8 @@ public class PointManager : MonoBehaviour
         if (points <= 0) return;
         AudioClip scoreSound = FindFirstObjectByType<AudioManager>().audioClips[1];
         FindFirstObjectByType<AudioManager>().PlayAudio(scoreSound);
+
+        OnScorePoint?.Invoke();
     }
 
     public void IncrementBalls()

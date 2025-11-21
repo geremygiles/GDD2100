@@ -1,5 +1,6 @@
 ﻿using System.Xml.Schema;
 using UnityEngine;
+using UnityEngine.Events;
 using static UnityEngine.Rendering.DebugUI;
 
 public class PlayerControls : MonoBehaviour
@@ -10,7 +11,9 @@ public class PlayerControls : MonoBehaviour
     FireDirectionPoint fdp;
     GameObject gameManager;
     public bool canMove = true;
+    public bool canFire = true;
     public PauseManager pauseManager;
+    public UnityEvent ClickDetected;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -43,7 +46,7 @@ public class PlayerControls : MonoBehaviour
 
     void OnFire()
     {
-        if (!canMove) return;
+        if (!canMove || !canFire) return;
         FindFirstObjectByType<FireBall>().Fire();
     }
 
@@ -66,7 +69,7 @@ public class PlayerControls : MonoBehaviour
 
     void OnPause()
     {
-        gameManager.GetComponent<PauseManager>().TogglePause();
+        gameManager.GetComponent<PauseManager>().TogglePause(true);
     }
 
     void OnAdjustSensitivity(UnityEngine.InputSystem.InputValue value)
@@ -84,6 +87,12 @@ public class PlayerControls : MonoBehaviour
     {
         if (!canMove) return;
         FindFirstObjectByType<CameraController>().ToggleZoom();
+    }
+
+    void OnClick()
+    {
+        Debug.Log("Click detected");
+        ClickDetected?.Invoke();
     }
 
     private void TurnCannon()
