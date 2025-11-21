@@ -16,9 +16,10 @@ MonoBehaviour:
   delay: 2
   advanceAction: 0
   allowMovement: 0
-  text: You can see your score and accuracy here.
+  text: You can see your current grade and accuracy here.
   textXPosition: 0
   textYPosition: 0
   focusTarget: 4
-  focusPointPosition: {x: -300, y: 200}
-  focusPointRadius: 100
+  uiElement: 2
+  focusPointOffset: {x: 50, y: 0}
+  focusPointRadius: 500

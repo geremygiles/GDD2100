@@ -14,11 +14,7 @@ public class SceneManagerSingleton : MonoBehaviour
         }
     }
 
-    private void LoadTutorial()
-    {
-        SceneManager.LoadScene(2);
-        SceneManager.LoadScene(4, LoadSceneMode.Additive);
-    }
+
 
     private void Awake()
     {
@@ -50,24 +46,31 @@ public class SceneManagerSingleton : MonoBehaviour
 
     public void LoadMenu()
     {
-        FindFirstObjectByType<HideMouse>()?.UnlockCursor();
+        FindFirstObjectByType<HideMouse>().UnlockCursor();
         SceneManager.LoadScene(0);
+    }
+
+    private void LoadTutorial()
+    {
+        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(4, LoadSceneMode.Additive);
     }
 
     public void LoadInstructions()
     {
         SceneManager.LoadScene(1);
+        
     }
 
     public void QuitApplication()
     {
-        FindFirstObjectByType<HideMouse>()?.UnlockCursor();
+        FindFirstObjectByType<HideMouse>().UnlockCursor();
         Application.Quit();
     }
 
     public void LoadEndScreen()
     {
-        FindFirstObjectByType<HideMouse>()?.UnlockCursor();
+        FindFirstObjectByType<HideMouse>().UnlockCursor();
         SceneManager.LoadScene(3);
     }
 

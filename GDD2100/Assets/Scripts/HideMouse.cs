@@ -18,6 +18,12 @@ public class HideMouse : MonoBehaviour
         Cursor.visible = true;
     }
 
+    public void LockCursor()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
     private void OnEnable()
     {
         pauseManager = FindFirstObjectByType<PauseManager>();

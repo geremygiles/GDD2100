@@ -16,8 +16,6 @@ public class TutorialManager : MonoBehaviour
     private int currentStateIndex = 0;
     public bool tutorialActive = true;
 
-    private GameObject currentFocusPoint;
-
     private PlayerControls playerControls;
 
     List<GameObject> currentUIElements = new List<GameObject>();
@@ -38,21 +36,6 @@ public class TutorialManager : MonoBehaviour
             return;
         }
     }
-
-    /*void Update()
-    {
-        try
-        {
-            Vector3 screenPos = Camera.main.WorldToScreenPoint(FindFirstObjectByType<CollisionCheck>().transform.position);
-            RectTransform rectTransform = gameObject.GetComponent<RectTransform>();
-
-            currentFocusPoint.transform.position = new Vector3(screenPos.x, screenPos.y, 0);
-        }   
-        catch (System.Exception)
-        {
-            // No need to update focus point if there is no target
-        }
-    }*/
 
     private void LoadAllStates()
     {
@@ -80,9 +63,6 @@ public class TutorialManager : MonoBehaviour
                 {
                     screenPos = Camera.main.WorldToScreenPoint(FindFirstObjectByType<FireBall>().transform.position);
                     RectTransform rectTransform = gameObject.GetComponent<RectTransform>();
-                    //screenPos -= new Vector3(rectTransform.transform.position.x, rectTransform.transform.position.y * 2, 0);
-                    //Debug.Log(gameObject.GetComponent<RectTransform>().transform.position);
-                    //Debug.Log("Cannon screen position: " + screenPos);
                     break;
                 }
             case FocusTarget.Target:
@@ -94,7 +74,8 @@ public class TutorialManager : MonoBehaviour
                 }
             case FocusTarget.UIElement:
                 {
-                    screenPos = Vector3.zero;
+                    screenPos = GameObject.FindGameObjectWithTag(tutorialStates[currentStateIndex].uiElement.ToString()).GetComponent<RectTransform>().position;
+                    screenPos += new Vector3(tutorialStates[currentStateIndex].focusPointOffset.x, tutorialStates[currentStateIndex].focusPointOffset.y);
                     break;
                 }
             default:
@@ -176,12 +157,11 @@ public class TutorialManager : MonoBehaviour
                 // Create and position focus point UI element based on target
                 GameObject focusPointObject = AddFocusPoint(currentState.focusPointRadius);
                 currentUIElements.Add(focusPointObject);
-                currentFocusPoint = focusPointObject;
             }
             else
             {
                 // Create and position focus point UI element
-                GameObject focusPointObject = AddFocusPoint(currentState.focusPointPosition.x, currentState.focusPointPosition.y, currentState.focusPointRadius);
+                GameObject focusPointObject = AddFocusPoint(currentState.focusPointOffset.x, currentState.focusPointOffset.y, currentState.focusPointRadius);
                 currentUIElements.Add(focusPointObject);
             }
         }
@@ -201,6 +181,7 @@ public class TutorialManager : MonoBehaviour
         Debug.Log("Advancing tutorial...");
         if (!tutorialActive) return;
         currentStateIndex++;
+
         if (currentStateIndex >= tutorialStates.Length)
         {
             EndTutorial();
