@@ -16,6 +16,8 @@ public class TutorialManager : MonoBehaviour
     private int currentStateIndex = 0;
     public bool tutorialActive = true;
 
+    private GameObject currentFocusPoint;
+
     private PlayerControls playerControls;
 
     List<GameObject> currentUIElements = new List<GameObject>();
@@ -37,6 +39,21 @@ public class TutorialManager : MonoBehaviour
         }
     }
 
+    /*void Update()
+    {
+        try
+        {
+            Vector3 screenPos = Camera.main.WorldToScreenPoint(FindFirstObjectByType<CollisionCheck>().transform.position);
+            RectTransform rectTransform = gameObject.GetComponent<RectTransform>();
+
+            currentFocusPoint.transform.position = new Vector3(screenPos.x, screenPos.y, 0);
+        }   
+        catch (System.Exception)
+        {
+            // No need to update focus point if there is no target
+        }
+    }*/
+
     private void LoadAllStates()
     {
         tutorialStates = Resources.LoadAll<TutorialState>("Tutorial States");
@@ -46,7 +63,7 @@ public class TutorialManager : MonoBehaviour
     private GameObject AddFocusPoint(float x, float y, float radius)
     {
         Image focusPoint = Instantiate(focusPointPrefab, transform);
-        focusPoint.transform.localPosition = new Vector3(x, y, 0);
+        focusPoint.transform.position = new Vector3(x, y, 0);
         focusPoint.rectTransform.sizeDelta = new Vector2(radius, radius);
         darkBackground.transform.SetAsFirstSibling();
         focusPoint.transform.SetAsFirstSibling();
@@ -62,14 +79,16 @@ public class TutorialManager : MonoBehaviour
             case FocusTarget.Cannon:
                 {
                     screenPos = Camera.main.WorldToScreenPoint(FindFirstObjectByType<FireBall>().transform.position);
-                    screenPos -= new Vector3(gameObject.GetComponent<RectTransform>().transform.position.x, gameObject.GetComponent<RectTransform>().transform.position.y, 0);
-                    Debug.Log(gameObject.GetComponent<RectTransform>().transform.position.x);
-                    Debug.Log("Cannon screen position: " + screenPos);
+                    RectTransform rectTransform = gameObject.GetComponent<RectTransform>();
+                    //screenPos -= new Vector3(rectTransform.transform.position.x, rectTransform.transform.position.y * 2, 0);
+                    //Debug.Log(gameObject.GetComponent<RectTransform>().transform.position);
+                    //Debug.Log("Cannon screen position: " + screenPos);
                     break;
                 }
             case FocusTarget.Target:
                 {
                     screenPos = Camera.main.WorldToScreenPoint(FindFirstObjectByType<CollisionCheck>().transform.position);
+                    RectTransform rectTransform = gameObject.GetComponent<RectTransform>();
                     Debug.Log("Target screen position: " + screenPos);
                     break;
                 }
@@ -83,12 +102,6 @@ public class TutorialManager : MonoBehaviour
                 break;
         }
         return AddFocusPoint(screenPos.x, screenPos.y, radius);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     private void LoadState()
@@ -163,6 +176,7 @@ public class TutorialManager : MonoBehaviour
                 // Create and position focus point UI element based on target
                 GameObject focusPointObject = AddFocusPoint(currentState.focusPointRadius);
                 currentUIElements.Add(focusPointObject);
+                currentFocusPoint = focusPointObject;
             }
             else
             {

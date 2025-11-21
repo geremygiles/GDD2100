@@ -23,6 +23,14 @@ public enum FocusTarget
     UIElement = 4
 }
 
+public enum UIElement
+{
+    None = 0,
+    ProgressUI = 1,
+    LevelUI = 2,
+    TurnUI = 3
+}
+
 [CreateAssetMenu(fileName = "TutorialState", menuName = "Scriptable Objects/TutorialState")]
 public class TutorialState : ScriptableObject
 {
@@ -36,6 +44,7 @@ public class TutorialState : ScriptableObject
     public float textYPosition;
     [Header ("Focus Point Settings")]
     public FocusTarget focusTarget = FocusTarget.None;
+    public UIElement uiElement = UIElement.None;
     public Vector2 focusPointPosition;
     public float focusPointRadius = 100f;
 }
