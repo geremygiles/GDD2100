@@ -20,7 +20,7 @@ public class SceneManagerSingleton : MonoBehaviour
     {
         if (instance != null && instance != this)
         {
-            Destroy(this);
+            Destroy(gameObject);
         }
         else
         {
@@ -37,6 +37,15 @@ public class SceneManagerSingleton : MonoBehaviour
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         BindButtons();
+        /* HideMouse hideMouse = FindFirstObjectByType<HideMouse>();
+        if (hideMouse != null)
+        {
+            if (scene.buildIndex != 2) // If not the main game scene
+            {
+                Debug.Log("Unlocking cursor for scene: " + scene.name);
+                hideMouse.UnlockCursor();
+            }
+        }*/
     }
 
     public void StartGame()

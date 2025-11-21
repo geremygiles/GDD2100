@@ -28,7 +28,7 @@ public class BindPauseMenuButton : MonoBehaviour
         {
             GetComponent<Button>().onClick.AddListener(delegate
             {
-                FindFirstObjectByType<PauseManager>().TogglePause(true);
+                FindFirstObjectByType<PauseManager>().TogglePause(true, false);
             });
         }
         else if (tag == "MainMenuButton")

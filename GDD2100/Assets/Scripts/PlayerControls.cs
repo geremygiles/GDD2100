@@ -71,7 +71,7 @@ public class PlayerControls : MonoBehaviour
     void OnPause()
     {
         if (!canPause) return;
-        gameManager.GetComponent<PauseManager>().TogglePause(true);
+        gameManager.GetComponent<PauseManager>().TogglePause(true, true);
     }
 
     void OnAdjustSensitivity(UnityEngine.InputSystem.InputValue value)
@@ -94,6 +94,7 @@ public class PlayerControls : MonoBehaviour
     void OnClick()
     {
         Debug.Log("Click detected");
+        if (pauseManager.IsMenuActive) return;
         ClickDetected?.Invoke();
     }
 

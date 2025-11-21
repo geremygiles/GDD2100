@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 1. Welcome
   m_EditorClassIdentifier: Assembly-CSharp::TutorialState
   loadMode: 0
-  delay: 0
+  delay: 0.01
   advanceAction: 0
   allowMovement: 0
   text: Welcome to Football Star!

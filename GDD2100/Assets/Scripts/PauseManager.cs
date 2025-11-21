@@ -10,6 +10,14 @@ public class PauseManager : MonoBehaviour
 
     public bool IsPaused { get; private set; } = false;
 
+    public bool IsMenuActive
+    {
+        get
+        {
+            return PauseMenu != null && PauseMenu.activeSelf;
+        }
+    }
+
     public UnityEvent<bool, bool> OnPauseToggled;
 
     private void Start()
@@ -50,12 +58,20 @@ public class PauseManager : MonoBehaviour
     {
         if (IsPaused != pause)
         {
-            TogglePause(visible);
+            TogglePause(visible, false);
         }
     }
 
-    public void TogglePause(bool visible)
+    public void TogglePause(bool visible, bool playerInput)
     {
+        // Prevent unpausing during tutorial
+        TutorialManager tutorialManager = FindFirstObjectByType<TutorialManager>();
+        if (tutorialManager != null && tutorialManager.tutorialActive && playerInput && IsPaused && !IsMenuActive)
+        {
+            return;
+        }
+
+
         IsPaused = !IsPaused;
         Time.timeScale = IsPaused ? 0f : 1f;
 

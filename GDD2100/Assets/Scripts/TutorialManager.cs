@@ -206,7 +206,12 @@ public class TutorialManager : MonoBehaviour
         FindFirstObjectByType<PointManager>()?.OnScorePoint.RemoveListener(AdvanceTutorial);
         FindFirstObjectByType<CameraController>()?.OnZoomToggled.RemoveListener(AdvanceTutorial);
         FindFirstObjectByType<PlayerControls>()?.ClickDetected.RemoveListener(AdvanceTutorial);
-        FindFirstObjectByType<PlayerControls>().canFire = true;
-        FindFirstObjectByType<PauseManager>().SetPause(false, false);
+
+        // Re-enable player controls at the end of the tutorial
+        PlayerControls playerControls = FindFirstObjectByType<PlayerControls>();
+        if (playerControls != null) FindFirstObjectByType<PlayerControls>().canFire = true;
+
+        PauseManager pauseManager = FindFirstObjectByType<PauseManager>();
+        if (pauseManager != null) FindFirstObjectByType<PauseManager>().SetPause(false, false);
     }
 }
