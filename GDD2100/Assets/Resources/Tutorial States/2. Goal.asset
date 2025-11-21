@@ -13,11 +13,13 @@ MonoBehaviour:
   m_Name: 2. Goal
   m_EditorClassIdentifier: 
   loadMode: 0
+  delay: 0
+  advanceAction: 0
   allowMovement: 0
   text: Your goal is to shoot a football through every ring, with the best accuracy
     possible.
   textXPosition: 0
   textYPosition: 0
-  hasFocusPoint: 1
-  focusPointPosition: {x: 50, y: 50}
-  focusPointRadius: 50
+  focusTarget: 3
+  focusPointPosition: {x: 0, y: 50}
+  focusPointRadius: 500

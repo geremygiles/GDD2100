@@ -14,6 +14,15 @@ public enum AdvanceAction
     Zoom = 2
 }
 
+public enum FocusTarget
+{
+    None = 0,
+    Set = 1,
+    Cannon = 2,
+    Target = 3,
+    UIElement = 4
+}
+
 [CreateAssetMenu(fileName = "TutorialState", menuName = "Scriptable Objects/TutorialState")]
 public class TutorialState : ScriptableObject
 {
@@ -26,7 +35,7 @@ public class TutorialState : ScriptableObject
     public float textXPosition;
     public float textYPosition;
     [Header ("Focus Point Settings")]
-    public bool hasFocusPoint;
+    public FocusTarget focusTarget = FocusTarget.None;
     public Vector2 focusPointPosition;
     public float focusPointRadius = 100f;
 }

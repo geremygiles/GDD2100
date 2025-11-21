@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: 4. How to move cannon
   m_EditorClassIdentifier: 
   loadMode: 1
+  delay: 0
+  advanceAction: 0
   allowMovement: 1
   text: You can move the cannon with the mouse or with WASD
   textXPosition: 0
   textYPosition: 0
-  hasFocusPoint: 0
+  focusTarget: 0
   focusPointPosition: {x: 0, y: 0}
   focusPointRadius: 0

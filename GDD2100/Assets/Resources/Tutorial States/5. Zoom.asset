@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: 5. Zoom
   m_EditorClassIdentifier: 
   loadMode: 0
+  delay: 0
   advanceAction: 2
   allowMovement: 1
   text: You can zoom into first-person view with Q.
   textXPosition: 0
   textYPosition: 0
-  hasFocusPoint: 1
+  focusTarget: 1
   focusPointPosition: {x: 0, y: 0}
   focusPointRadius: 10000

@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -53,6 +54,37 @@ public class TutorialManager : MonoBehaviour
         return focusPoint.gameObject;
     }
 
+    private GameObject AddFocusPoint(float radius)
+    {
+        Vector3 screenPos = Vector3.zero;
+        switch (tutorialStates[currentStateIndex].focusTarget)
+        {
+            case FocusTarget.Cannon:
+                {
+                    screenPos = Camera.main.WorldToScreenPoint(FindFirstObjectByType<FireBall>().transform.position);
+                    screenPos -= new Vector3(gameObject.GetComponent<RectTransform>().transform.position.x, gameObject.GetComponent<RectTransform>().transform.position.y, 0);
+                    Debug.Log(gameObject.GetComponent<RectTransform>().transform.position.x);
+                    Debug.Log("Cannon screen position: " + screenPos);
+                    break;
+                }
+            case FocusTarget.Target:
+                {
+                    screenPos = Camera.main.WorldToScreenPoint(FindFirstObjectByType<CollisionCheck>().transform.position);
+                    Debug.Log("Target screen position: " + screenPos);
+                    break;
+                }
+            case FocusTarget.UIElement:
+                {
+                    screenPos = Vector3.zero;
+                    break;
+                }
+            default:
+                Debug.LogWarning("Unknown focus target.");
+                break;
+        }
+        return AddFocusPoint(screenPos.x, screenPos.y, radius);
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -63,18 +95,21 @@ public class TutorialManager : MonoBehaviour
     {
         TutorialState currentState = tutorialStates[currentStateIndex];
 
+        StartCoroutine(StateLoadCoroutine(currentState));
+    }
+
+    private IEnumerator StateLoadCoroutine(TutorialState currentState)
+    {
+        // Wait if there's a delay
+        WaitForSeconds wait = new WaitForSeconds(currentState.delay);
+        yield return wait;
+
+
         if (currentState.loadMode == StateLoadMode.Replace)
         {
             ClearUI();
         }
 
-        // Wait if there's a delay
-        //if (currentState.delay > 0)
-       //{
-        //    Debug.Log("Delaying tutorial state for " + currentState.delay + " seconds.");
-        //    Invoke(nameof(LoadState), currentState.delay);
-        //    return;
-        //}
 
         // Clear previous listeners to avoid multiple triggers
         FindFirstObjectByType<PointManager>().OnScorePoint.RemoveListener(AdvanceTutorial);
@@ -111,7 +146,7 @@ public class TutorialManager : MonoBehaviour
         if (currentState.text == "")
         {
             Debug.LogWarning("Tutorial State has no text to display.");
-        } 
+        }
         if (currentState.text != "")
         {
             // Create and position text UI element
@@ -121,11 +156,20 @@ public class TutorialManager : MonoBehaviour
             currentUIElements.Add(textElementObject);
         }
 
-        if (currentState.hasFocusPoint)
+        if (currentState.focusTarget != FocusTarget.None)
         {
-            // Create and position focus point UI element
-            GameObject focusPointObject = AddFocusPoint(currentState.focusPointPosition.x, currentState.focusPointPosition.y, currentState.focusPointRadius);
-            currentUIElements.Add(focusPointObject);
+            if (currentState.focusTarget != FocusTarget.Set)
+            {
+                // Create and position focus point UI element based on target
+                GameObject focusPointObject = AddFocusPoint(currentState.focusPointRadius);
+                currentUIElements.Add(focusPointObject);
+            }
+            else
+            {
+                // Create and position focus point UI element
+                GameObject focusPointObject = AddFocusPoint(currentState.focusPointPosition.x, currentState.focusPointPosition.y, currentState.focusPointRadius);
+                currentUIElements.Add(focusPointObject);
+            }
         }
     }
 

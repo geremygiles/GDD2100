@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: 5. Zoom 2
   m_EditorClassIdentifier: 
   loadMode: 0
+  delay: 2
   advanceAction: 2
   allowMovement: 1
   text: You can also zoom back out with Q.
   textXPosition: 0
   textYPosition: 0
-  hasFocusPoint: 1
+  focusTarget: 1
   focusPointPosition: {x: 0, y: 0}
   focusPointRadius: 10000

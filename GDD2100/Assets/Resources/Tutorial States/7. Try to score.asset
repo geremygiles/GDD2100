@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: 7. Try to score
   m_EditorClassIdentifier: 
   loadMode: 0
+  delay: 0
   advanceAction: 1
   allowMovement: 1
   text: Try to score a point!
   textXPosition: 0
   textYPosition: 300
-  hasFocusPoint: 1
+  focusTarget: 1
   focusPointPosition: {x: 0, y: 0}
   focusPointRadius: 10000
