@@ -37,7 +37,6 @@ public class PauseManager : MonoBehaviour
 
         IsPaused = false;
         Time.timeScale = IsPaused ? 0f : 1f;
-        OnPauseToggled?.Invoke(IsPaused);
 
         PauseMenu = Instantiate(pauseMenuPrefab, FindFirstObjectByType<Canvas>().transform);
         PauseMenu.SetActive(false);
@@ -56,12 +55,14 @@ public class PauseManager : MonoBehaviour
         IsPaused = !IsPaused;
         Time.timeScale = IsPaused ? 0f : 1f;
 
-        if (visible && PauseMenu == null)
+        if (visible)
         {
-            LoadPauseMenu();
+            if (PauseMenu == null)
+            {
+                LoadPauseMenu();
+            }
             PauseMenu.SetActive(IsPaused);
         }
-        
 
         OnPauseToggled?.Invoke(IsPaused); // Toggles mouse in Hide Mouse and movement in PlayerControls, and prompts difficulty selector to find difficulty text
     }

@@ -10,13 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1624195a47a920247aedc3215ff33a50, type: 3}
-  m_Name: How to move cannon
+  m_Name: 2. Goal
   m_EditorClassIdentifier: 
-  loadMode: 1
-  allowMovement: 1
-  text: You can move the cannon with the mouse or with WASD
+  loadMode: 0
+  allowMovement: 0
+  text: Your goal is to shoot a football through every ring, with the best accuracy
+    possible.
   textXPosition: 0
   textYPosition: 0
-  hasFocusPoint: 0
-  focusPointPosition: {x: 0, y: 0}
-  focusPointRadius: 0
+  hasFocusPoint: 1
+  focusPointPosition: {x: 50, y: 50}
+  focusPointRadius: 50

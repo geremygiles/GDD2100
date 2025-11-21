@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class TutorialManager : MonoBehaviour
@@ -8,8 +9,9 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] Image focusPointPrefab;
     [SerializeField] GameObject darkBackground;
     [SerializeField] TMPro.TextMeshProUGUI tutorialTextPrefab;
+    [SerializeField] TMPro.TextMeshProUGUI clickText;
 
-    [SerializeField] TutorialState[] tutorialStates;
+    TutorialState[] tutorialStates;
     private int currentStateIndex = 0;
     public bool tutorialActive = true;
 
@@ -19,6 +21,8 @@ public class TutorialManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        LoadAllStates();
+
         LoadState();
 
         try
@@ -30,6 +34,12 @@ public class TutorialManager : MonoBehaviour
             Debug.LogWarning("No PlayerController found in scene to disable movement.");
             return;
         }
+    }
+
+    private void LoadAllStates()
+    {
+        tutorialStates = Resources.LoadAll<TutorialState>("Tutorial States");
+        Debug.Log("Loaded " + tutorialStates.Length + " tutorial states.");
     }
 
     private GameObject AddFocusPoint(float x, float y, float radius)
@@ -56,6 +66,43 @@ public class TutorialManager : MonoBehaviour
         if (currentState.loadMode == StateLoadMode.Replace)
         {
             ClearUI();
+        }
+
+        // Wait if there's a delay
+        //if (currentState.delay > 0)
+       //{
+        //    Debug.Log("Delaying tutorial state for " + currentState.delay + " seconds.");
+        //    Invoke(nameof(LoadState), currentState.delay);
+        //    return;
+        //}
+
+        // Clear previous listeners to avoid multiple triggers
+        FindFirstObjectByType<PointManager>().OnScorePoint.RemoveListener(AdvanceTutorial);
+        FindFirstObjectByType<CameraController>().OnZoomToggled.RemoveListener(AdvanceTutorial);
+        FindFirstObjectByType<PlayerControls>().ClickDetected.RemoveListener(AdvanceTutorial);
+        FindFirstObjectByType<PlayerControls>().canFire = true;
+        clickText.gameObject.SetActive(false);
+
+        // Set up listeners based on advance action
+        switch (currentState.advanceAction)
+        {
+            case AdvanceAction.Click:
+                // Ensure cannon firing is disabled
+                FindFirstObjectByType<PlayerControls>().canFire = false;
+                FindFirstObjectByType<PlayerControls>().ClickDetected.AddListener(AdvanceTutorial);
+                clickText.gameObject.SetActive(true);
+                break;
+            case AdvanceAction.Score:
+                // Advance when player scores a point
+                FindFirstObjectByType<PointManager>().OnScorePoint.AddListener(AdvanceTutorial);
+                break;
+            case AdvanceAction.Zoom:
+                // Wait for a zoom to advance
+                FindFirstObjectByType<CameraController>().OnZoomToggled.AddListener(AdvanceTutorial);
+                break;
+            default:
+                Debug.LogWarning("Unknown advance action.");
+                break;
         }
 
         // Disable or enable player movement based on state
@@ -98,8 +145,7 @@ public class TutorialManager : MonoBehaviour
         currentStateIndex++;
         if (currentStateIndex >= tutorialStates.Length)
         {
-            tutorialActive = false;
-            ClearUI();
+            EndTutorial();
             return;
         }
         LoadState();
@@ -107,8 +153,20 @@ public class TutorialManager : MonoBehaviour
 
     private void EndTutorial()
     {
+
+
         tutorialActive = false;
         ClearUI();
-        Destroy(transform.parent.gameObject);
+        SceneManager.UnloadSceneAsync("Tutorial");
+    }
+
+    private void OnDestroy()
+    {
+        // Clean up listeners
+        FindFirstObjectByType<PointManager>()?.OnScorePoint.RemoveListener(AdvanceTutorial);
+        FindFirstObjectByType<CameraController>()?.OnZoomToggled.RemoveListener(AdvanceTutorial);
+        FindFirstObjectByType<PlayerControls>()?.ClickDetected.RemoveListener(AdvanceTutorial);
+        FindFirstObjectByType<PlayerControls>().canFire = true;
+        FindFirstObjectByType<PauseManager>().SetPause(false, false);
     }
 }

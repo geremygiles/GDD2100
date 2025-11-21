@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public enum StateLoadMode
@@ -6,10 +7,18 @@ public enum StateLoadMode
     Add = 1
 }
 
+public enum AdvanceAction
+{
+    Click = 0,
+    Score = 1,
+    Zoom = 2
+}
+
 [CreateAssetMenu(fileName = "TutorialState", menuName = "Scriptable Objects/TutorialState")]
 public class TutorialState : ScriptableObject
 {
     public StateLoadMode loadMode;
+    public AdvanceAction advanceAction;
     public bool allowMovement = false;
     [Header ("Text Settings")]
     public string text;
