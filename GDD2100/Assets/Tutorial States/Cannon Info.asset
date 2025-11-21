@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: Cannon Info
   m_EditorClassIdentifier: 
   loadMode: 0
+  allowMovement: 0
   text: This is your cannon!
   textXPosition: 0
-  textYPosition: 0
+  textYPosition: 50
   hasFocusPoint: 1
   focusPointPosition: {x: 0, y: -200}
   focusPointRadius: 300

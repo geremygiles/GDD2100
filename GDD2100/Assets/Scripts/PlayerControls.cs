@@ -66,7 +66,7 @@ public class PlayerControls : MonoBehaviour
 
     void OnPause()
     {
-        gameManager.GetComponent<PauseManager>().TogglePause();
+        gameManager.GetComponent<PauseManager>().TogglePause(true);
     }
 
     void OnAdjustSensitivity(UnityEngine.InputSystem.InputValue value)

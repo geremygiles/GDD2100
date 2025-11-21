@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1624195a47a920247aedc3215ff33a50, type: 3}
-  m_Name: Welcome
-  m_EditorClassIdentifier: Assembly-CSharp::TutorialState
+  m_Name: Score Info
+  m_EditorClassIdentifier: 
   loadMode: 0
   allowMovement: 0
-  text: Welcome to Football Star!
+  text: You can see your score and accuracy here.
   textXPosition: 0
   textYPosition: 0
-  hasFocusPoint: 0
-  focusPointPosition: {x: 0, y: 0}
-  focusPointRadius: 0
+  hasFocusPoint: 1
+  focusPointPosition: {x: -300, y: 200}
+  focusPointRadius: 100

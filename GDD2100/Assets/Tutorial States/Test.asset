@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Test
   m_EditorClassIdentifier: 
   loadMode: 0
-  text: 
+  allowMovement: 0
+  text: Your goal is to shoot a football through every ring, with the best accuracy
+    possible.
   textXPosition: 0
   textYPosition: 0
   hasFocusPoint: 1

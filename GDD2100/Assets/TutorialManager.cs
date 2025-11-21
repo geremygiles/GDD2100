@@ -13,11 +13,23 @@ public class TutorialManager : MonoBehaviour
     private int currentStateIndex = 0;
     public bool tutorialActive = true;
 
+    private PlayerControls playerControls;
+
     List<GameObject> currentUIElements = new List<GameObject>();
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         LoadState();
+
+        try
+        {
+            playerControls = FindFirstObjectByType<PlayerControls>();
+        }
+        catch (System.Exception)
+        {
+            Debug.LogWarning("No PlayerController found in scene to disable movement.");
+            return;
+        }
     }
 
     private GameObject AddFocusPoint(float x, float y, float radius)
@@ -45,6 +57,9 @@ public class TutorialManager : MonoBehaviour
         {
             ClearUI();
         }
+
+        // Disable or enable player movement based on state
+        FindFirstObjectByType<PauseManager>().SetPause(!currentState.allowMovement, false);
 
         if (currentState.text == "")
         {

@@ -24,7 +24,6 @@ public class DifficultySelector : MonoBehaviour
     }
 
     public UnityEvent<DifficultyLevel> OnDifficultyChanged;
-    public PauseManager pauseManager;
 
     public void SetDifficulty(int level)
     {
@@ -38,6 +37,8 @@ public class DifficultySelector : MonoBehaviour
 
     private void UpdateLevel()
     {
+        difficultyDescriptionText = GameObject.Find("Difficulty Description").GetComponent<TMPro.TextMeshProUGUI>();
+
         switch (difficultyLevel)
         {
             case DifficultyLevel.Easy:
@@ -56,22 +57,5 @@ public class DifficultySelector : MonoBehaviour
                 Debug.Log("Unknown difficulty level");
                 break;
         }
-    }
-
-    private void OnEnable()
-    {
-        pauseManager = GetComponent<PauseManager>();
-        pauseManager.OnPauseToggled.AddListener(HandlePauseToggle);
-    }
-
-    private void OnDisable()
-    {
-        pauseManager.OnPauseToggled.RemoveListener(HandlePauseToggle);
-    }
-
-    private void HandlePauseToggle(bool isPaused)
-    {
-        if (!isPaused) return;
-        difficultyDescriptionText = GameObject.Find("Difficulty Description").GetComponent<TMPro.TextMeshProUGUI>();
     }
 }

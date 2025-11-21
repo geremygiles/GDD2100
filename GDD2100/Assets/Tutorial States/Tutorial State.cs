@@ -10,6 +10,7 @@ public enum StateLoadMode
 public class TutorialState : ScriptableObject
 {
     public StateLoadMode loadMode;
+    public bool allowMovement = false;
     [Header ("Text Settings")]
     public string text;
     public float textXPosition;
@@ -17,5 +18,5 @@ public class TutorialState : ScriptableObject
     [Header ("Focus Point Settings")]
     public bool hasFocusPoint;
     public Vector2 focusPointPosition;
-    public float focusPointRadius;
+    public float focusPointRadius = 100f;
 }

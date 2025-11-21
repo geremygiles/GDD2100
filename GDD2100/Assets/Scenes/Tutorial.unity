@@ -225,6 +225,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 781928d74705d3a429d600646ba00e68, type: 2}
   - {fileID: 11400000, guid: d28be61b99cd9264581950bf6931208b, type: 2}
   - {fileID: 11400000, guid: ed4cf50aa622a9345a9359bbb8f7af78, type: 2}
+  - {fileID: 11400000, guid: be3c7eb67c678f9468046f1f949bc7a8, type: 2}
   tutorialActive: 1
 --- !u!225 &48951886
 CanvasGroup:
