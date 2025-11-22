@@ -12,6 +12,7 @@ public class PlayerControls : MonoBehaviour
     GameObject gameManager;
     public bool canMove = true;
     public bool canFire = true;
+    public bool canPause = true;
     public PauseManager pauseManager;
     public UnityEvent ClickDetected;
 
@@ -39,7 +40,7 @@ public class PlayerControls : MonoBehaviour
         pauseManager.OnPauseToggled.RemoveListener(HandlePauseToggle);
     }
 
-    private void HandlePauseToggle(bool isPaused)
+    private void HandlePauseToggle(bool isPaused, bool visible)
     {
         canMove = !isPaused;
     }
@@ -69,7 +70,8 @@ public class PlayerControls : MonoBehaviour
 
     void OnPause()
     {
-        gameManager.GetComponent<PauseManager>().TogglePause(true);
+        if (!canPause) return;
+        gameManager.GetComponent<PauseManager>().TogglePause(true, true);
     }
 
     void OnAdjustSensitivity(UnityEngine.InputSystem.InputValue value)
@@ -92,6 +94,7 @@ public class PlayerControls : MonoBehaviour
     void OnClick()
     {
         Debug.Log("Click detected");
+        if (pauseManager.IsMenuActive) return;
         ClickDetected?.Invoke();
     }
 

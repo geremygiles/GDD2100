@@ -13,11 +13,13 @@ MonoBehaviour:
   m_Name: z. Have fun
   m_EditorClassIdentifier: 
   loadMode: 0
+  delay: 0
   advanceAction: 0
   allowMovement: 0
-  text: Have fun!
+  text: That's all for the tutorial! Have fun! :D
   textXPosition: 0
   textYPosition: 0
-  hasFocusPoint: 0
-  focusPointPosition: {x: 0, y: 0}
+  focusTarget: 0
+  uiElement: 0
+  focusPointOffset: {x: 0, y: 0}
   focusPointRadius: 100

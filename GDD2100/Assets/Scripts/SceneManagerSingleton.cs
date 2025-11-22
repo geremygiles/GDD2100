@@ -14,17 +14,13 @@ public class SceneManagerSingleton : MonoBehaviour
         }
     }
 
-    private void LoadTutorial()
-    {
-        SceneManager.LoadScene(2);
-        SceneManager.LoadScene(4, LoadSceneMode.Additive);
-    }
+
 
     private void Awake()
     {
         if (instance != null && instance != this)
         {
-            Destroy(this);
+            Destroy(gameObject);
         }
         else
         {
@@ -41,6 +37,15 @@ public class SceneManagerSingleton : MonoBehaviour
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         BindButtons();
+        /* HideMouse hideMouse = FindFirstObjectByType<HideMouse>();
+        if (hideMouse != null)
+        {
+            if (scene.buildIndex != 2) // If not the main game scene
+            {
+                Debug.Log("Unlocking cursor for scene: " + scene.name);
+                hideMouse.UnlockCursor();
+            }
+        }*/
     }
 
     public void StartGame()
@@ -50,24 +55,43 @@ public class SceneManagerSingleton : MonoBehaviour
 
     public void LoadMenu()
     {
-        FindFirstObjectByType<HideMouse>()?.UnlockCursor();
+        HideMouse hideMouse = FindFirstObjectByType<HideMouse>();
+        if (hideMouse != null)
+        {
+            hideMouse.UnlockCursor();
+        }
         SceneManager.LoadScene(0);
+    }
+
+    private void LoadTutorial()
+    {
+        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(4, LoadSceneMode.Additive);
     }
 
     public void LoadInstructions()
     {
         SceneManager.LoadScene(1);
+        
     }
 
     public void QuitApplication()
     {
-        FindFirstObjectByType<HideMouse>()?.UnlockCursor();
+        HideMouse hideMouse = FindFirstObjectByType<HideMouse>();
+        if (hideMouse != null)
+        {
+            hideMouse.UnlockCursor();
+        }
         Application.Quit();
     }
 
     public void LoadEndScreen()
     {
-        FindFirstObjectByType<HideMouse>()?.UnlockCursor();
+        HideMouse hideMouse = FindFirstObjectByType<HideMouse>();
+        if (hideMouse != null)
+        {
+            hideMouse.UnlockCursor();
+        }
         SceneManager.LoadScene(3);
     }
 

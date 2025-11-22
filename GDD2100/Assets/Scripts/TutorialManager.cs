@@ -16,8 +16,6 @@ public class TutorialManager : MonoBehaviour
     private int currentStateIndex = 0;
     public bool tutorialActive = true;
 
-    private GameObject currentFocusPoint;
-
     private PlayerControls playerControls;
 
     List<GameObject> currentUIElements = new List<GameObject>();
@@ -39,70 +37,12 @@ public class TutorialManager : MonoBehaviour
         }
     }
 
-    /*void Update()
-    {
-        try
-        {
-            Vector3 screenPos = Camera.main.WorldToScreenPoint(FindFirstObjectByType<CollisionCheck>().transform.position);
-            RectTransform rectTransform = gameObject.GetComponent<RectTransform>();
-
-            currentFocusPoint.transform.position = new Vector3(screenPos.x, screenPos.y, 0);
-        }   
-        catch (System.Exception)
-        {
-            // No need to update focus point if there is no target
-        }
-    }*/
-
     private void LoadAllStates()
     {
         tutorialStates = Resources.LoadAll<TutorialState>("Tutorial States");
         Debug.Log("Loaded " + tutorialStates.Length + " tutorial states.");
     }
-
-    private GameObject AddFocusPoint(float x, float y, float radius)
-    {
-        Image focusPoint = Instantiate(focusPointPrefab, transform);
-        focusPoint.transform.position = new Vector3(x, y, 0);
-        focusPoint.rectTransform.sizeDelta = new Vector2(radius, radius);
-        darkBackground.transform.SetAsFirstSibling();
-        focusPoint.transform.SetAsFirstSibling();
-        
-        return focusPoint.gameObject;
-    }
-
-    private GameObject AddFocusPoint(float radius)
-    {
-        Vector3 screenPos = Vector3.zero;
-        switch (tutorialStates[currentStateIndex].focusTarget)
-        {
-            case FocusTarget.Cannon:
-                {
-                    screenPos = Camera.main.WorldToScreenPoint(FindFirstObjectByType<FireBall>().transform.position);
-                    RectTransform rectTransform = gameObject.GetComponent<RectTransform>();
-                    //screenPos -= new Vector3(rectTransform.transform.position.x, rectTransform.transform.position.y * 2, 0);
-                    //Debug.Log(gameObject.GetComponent<RectTransform>().transform.position);
-                    //Debug.Log("Cannon screen position: " + screenPos);
-                    break;
-                }
-            case FocusTarget.Target:
-                {
-                    screenPos = Camera.main.WorldToScreenPoint(FindFirstObjectByType<CollisionCheck>().transform.position);
-                    RectTransform rectTransform = gameObject.GetComponent<RectTransform>();
-                    Debug.Log("Target screen position: " + screenPos);
-                    break;
-                }
-            case FocusTarget.UIElement:
-                {
-                    screenPos = Vector3.zero;
-                    break;
-                }
-            default:
-                Debug.LogWarning("Unknown focus target.");
-                break;
-        }
-        return AddFocusPoint(screenPos.x, screenPos.y, radius);
-    }
+    
 
     private void LoadState()
     {
@@ -129,7 +69,7 @@ public class TutorialManager : MonoBehaviour
         FindFirstObjectByType<CameraController>().OnZoomToggled.RemoveListener(AdvanceTutorial);
         FindFirstObjectByType<PlayerControls>().ClickDetected.RemoveListener(AdvanceTutorial);
         FindFirstObjectByType<PlayerControls>().canFire = true;
-        clickText.gameObject.SetActive(false);
+        //clickText.gameObject.SetActive(false);
 
         // Set up listeners based on advance action
         switch (currentState.advanceAction)
@@ -138,20 +78,25 @@ public class TutorialManager : MonoBehaviour
                 // Ensure cannon firing is disabled
                 FindFirstObjectByType<PlayerControls>().canFire = false;
                 FindFirstObjectByType<PlayerControls>().ClickDetected.AddListener(AdvanceTutorial);
-                clickText.gameObject.SetActive(true);
+                //clickText.gameObject.SetActive(true);
+                clickText.text = "Click to continue...";
                 break;
             case AdvanceAction.Score:
                 // Advance when player scores a point
                 FindFirstObjectByType<PointManager>().OnScorePoint.AddListener(AdvanceTutorial);
+                clickText.text = "Score to continue...";
                 break;
             case AdvanceAction.Zoom:
                 // Wait for a zoom to advance
                 FindFirstObjectByType<CameraController>().OnZoomToggled.AddListener(AdvanceTutorial);
+                clickText.text = "Zoom to continue...";
                 break;
             default:
                 Debug.LogWarning("Unknown advance action.");
                 break;
         }
+
+        
 
         // Disable or enable player movement based on state
         FindFirstObjectByType<PauseManager>().SetPause(!currentState.allowMovement, false);
@@ -176,15 +121,60 @@ public class TutorialManager : MonoBehaviour
                 // Create and position focus point UI element based on target
                 GameObject focusPointObject = AddFocusPoint(currentState.focusPointRadius);
                 currentUIElements.Add(focusPointObject);
-                currentFocusPoint = focusPointObject;
             }
             else
             {
                 // Create and position focus point UI element
-                GameObject focusPointObject = AddFocusPoint(currentState.focusPointPosition.x, currentState.focusPointPosition.y, currentState.focusPointRadius);
+                GameObject focusPointObject = AddFocusPoint(currentState.focusPointOffset.x, currentState.focusPointOffset.y, currentState.focusPointRadius);
                 currentUIElements.Add(focusPointObject);
             }
         }
+    }
+
+    private GameObject AddFocusPoint(float x, float y, float radius)
+    {
+        Image focusPoint = Instantiate(focusPointPrefab, transform);
+        focusPoint.transform.position = new Vector3(x, y, 0);
+        focusPoint.rectTransform.sizeDelta = new Vector2(radius, radius);
+        darkBackground.transform.SetAsFirstSibling();
+        focusPoint.transform.SetAsFirstSibling();
+
+        return focusPoint.gameObject;
+    }
+
+    private GameObject AddFocusPoint(float radius)
+    {
+        Vector3 screenPos = Vector3.zero;
+        switch (tutorialStates[currentStateIndex].focusTarget)
+        {
+            case FocusTarget.Cannon:
+                {
+                    screenPos = Camera.main.WorldToScreenPoint(FindFirstObjectByType<FireBall>().transform.position);
+                    break;
+                }
+            case FocusTarget.Target:
+                {
+                    screenPos = Camera.main.WorldToScreenPoint(FindFirstObjectByType<CollisionCheck>().transform.position);
+                    Debug.Log("Target screen position: " + screenPos);
+                    break;
+                }
+            case FocusTarget.UIElement:
+                {
+                    screenPos = GameObject.FindGameObjectWithTag(tutorialStates[currentStateIndex].uiElement.ToString()).GetComponent<RectTransform>().position;
+                    screenPos += new Vector3(tutorialStates[currentStateIndex].focusPointOffset.x, tutorialStates[currentStateIndex].focusPointOffset.y);
+                    break;
+                }
+            case FocusTarget.GuideLine:
+                {
+                    screenPos = Camera.main.WorldToScreenPoint(GameObject.FindGameObjectWithTag("GuideLine").transform.position);
+                    screenPos += new Vector3(tutorialStates[currentStateIndex].focusPointOffset.x, tutorialStates[currentStateIndex].focusPointOffset.y);
+                    break;
+                }
+            default:
+                Debug.LogWarning("Unknown focus target.");
+                break;
+        }
+        return AddFocusPoint(screenPos.x, screenPos.y, radius);
     }
 
     private void ClearUI()
@@ -201,6 +191,7 @@ public class TutorialManager : MonoBehaviour
         Debug.Log("Advancing tutorial...");
         if (!tutorialActive) return;
         currentStateIndex++;
+
         if (currentStateIndex >= tutorialStates.Length)
         {
             EndTutorial();
@@ -224,7 +215,12 @@ public class TutorialManager : MonoBehaviour
         FindFirstObjectByType<PointManager>()?.OnScorePoint.RemoveListener(AdvanceTutorial);
         FindFirstObjectByType<CameraController>()?.OnZoomToggled.RemoveListener(AdvanceTutorial);
         FindFirstObjectByType<PlayerControls>()?.ClickDetected.RemoveListener(AdvanceTutorial);
-        FindFirstObjectByType<PlayerControls>().canFire = true;
-        FindFirstObjectByType<PauseManager>().SetPause(false, false);
+
+        // Re-enable player controls at the end of the tutorial
+        PlayerControls playerControls = FindFirstObjectByType<PlayerControls>();
+        if (playerControls != null) FindFirstObjectByType<PlayerControls>().canFire = true;
+
+        PauseManager pauseManager = FindFirstObjectByType<PauseManager>();
+        if (pauseManager != null) FindFirstObjectByType<PauseManager>().SetPause(false, false);
     }
 }

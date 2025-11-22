@@ -20,14 +20,15 @@ public enum FocusTarget
     Set = 1,
     Cannon = 2,
     Target = 3,
-    UIElement = 4
+    UIElement = 4,
+    GuideLine = 5
 }
 
 public enum UIElement
 {
     None = 0,
     ProgressUI = 1,
-    LevelUI = 2,
+    GradeUI = 2,
     TurnUI = 3
 }
 
@@ -45,6 +46,6 @@ public class TutorialState : ScriptableObject
     [Header ("Focus Point Settings")]
     public FocusTarget focusTarget = FocusTarget.None;
     public UIElement uiElement = UIElement.None;
-    public Vector2 focusPointPosition;
+    public Vector2 focusPointOffset;
     public float focusPointRadius = 100f;
 }

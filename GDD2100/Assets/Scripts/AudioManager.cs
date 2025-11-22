@@ -14,6 +14,12 @@ public class AudioManager : MonoBehaviour
     public void ClosedCaptionsEnabled(bool enabled)
     {
         closedCaptionsEnabled = enabled;
+
+        if (!closedCaptionsEnabled)
+        {
+            closedCaptionsText.gameObject.SetActive(false);
+            closedCaptionsText.gameObject.GetComponentInParent<Image>().enabled = false;
+        }
     }
 
     private float closedCaptionPadding = 2f;

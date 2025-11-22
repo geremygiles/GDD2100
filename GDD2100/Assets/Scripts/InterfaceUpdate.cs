@@ -19,7 +19,7 @@ public class InterfaceUpdate : MonoBehaviour
         {
             switch (textElement.name)
             {
-                case "ScoreText":
+                case "ProgressText":
                     textElement.text = "Rings Remaining: " + ((PointManager.Instance.NumOfLevels * PointManager.Instance.Rings) - PointManager.Instance.Points);
                     break;
                 case "TurnSpeedText":

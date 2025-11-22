@@ -22,7 +22,7 @@ public class PointManager : MonoBehaviour
     {
         if (_instance != null && _instance != this)
         {
-            Destroy(this);
+            Destroy(gameObject);
         }
         else
         {

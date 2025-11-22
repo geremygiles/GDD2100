@@ -10,12 +10,19 @@ public class PauseManager : MonoBehaviour
 
     public bool IsPaused { get; private set; } = false;
 
-    public UnityEvent<bool> OnPauseToggled;
+    public bool IsMenuActive
+    {
+        get
+        {
+            return PauseMenu != null && PauseMenu.activeSelf;
+        }
+    }
+
+    public UnityEvent<bool, bool> OnPauseToggled;
 
     private void Start()
     {
         LoadPauseMenu();
-        SceneManager.sceneLoaded += LoadPauseMenu;
     }
 
     private void LoadPauseMenu(Scene scene, LoadSceneMode mode)
@@ -25,38 +32,52 @@ public class PauseManager : MonoBehaviour
 
     private void LoadPauseMenu()
     {
-        if (PauseMenu != null)
-        {
-            Destroy(PauseMenu);
-        }
-
         if (SceneManager.GetActiveScene().buildIndex != 2)
         {
             return; // No pause menu in main menu or instructions scene
         }
 
-        IsPaused = false;
-        Time.timeScale = IsPaused ? 0f : 1f;
+        try
+        {
+            PauseMenu = GameObject.FindWithTag("PauseMenu");
+            Debug.Log("PauseMenu found in scene:" + PauseMenu.name);
+        }
+        catch
+        {
+            IsPaused = false;
+            Time.timeScale = IsPaused ? 0f : 1f;
 
-        PauseMenu = Instantiate(pauseMenuPrefab, FindFirstObjectByType<Canvas>().transform);
-        PauseMenu.SetActive(false);
+            PauseMenu = Instantiate(pauseMenuPrefab);
+            PauseMenu.SetActive(false);
+        }
+
+        
     }
 
     public void SetPause(bool pause, bool visible)
     {
         if (IsPaused != pause)
         {
-            TogglePause(visible);
+            TogglePause(visible, false);
         }
     }
 
-    public void TogglePause(bool visible)
+    public void TogglePause(bool visible, bool playerInput)
     {
+        // Prevent unpausing during tutorial
+        TutorialManager tutorialManager = FindFirstObjectByType<TutorialManager>();
+        if (tutorialManager != null && tutorialManager.tutorialActive && playerInput && IsPaused && !IsMenuActive)
+        {
+            return;
+        }
+
+
         IsPaused = !IsPaused;
         Time.timeScale = IsPaused ? 0f : 1f;
 
         if (visible)
         {
+            Debug.Log(PauseMenu == null ? "PauseMenu is null" : "PauseMenu is not null");
             if (PauseMenu == null)
             {
                 LoadPauseMenu();
@@ -64,6 +85,11 @@ public class PauseManager : MonoBehaviour
             PauseMenu.SetActive(IsPaused);
         }
 
-        OnPauseToggled?.Invoke(IsPaused); // Toggles mouse in Hide Mouse and movement in PlayerControls, and prompts difficulty selector to find difficulty text
+        OnPauseToggled?.Invoke(IsPaused, visible); // Toggles mouse in Hide Mouse and movement in PlayerControls
+    }
+
+    private void OnDisable()
+    {
+        
     }
 }

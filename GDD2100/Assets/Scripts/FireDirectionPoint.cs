@@ -29,4 +29,9 @@ public class FireDirectionPoint : MonoBehaviour
         position.z = 0f;
         transform.position = position;
     }
+    
+    public void ResetPosition()
+    {
+        transform.position = Vector3.zero;
+    }
 }
