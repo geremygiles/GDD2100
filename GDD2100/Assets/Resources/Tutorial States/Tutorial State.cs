@@ -20,7 +20,8 @@ public enum FocusTarget
     Set = 1,
     Cannon = 2,
     Target = 3,
-    UIElement = 4
+    UIElement = 4,
+    GuideLine = 5
 }
 
 public enum UIElement

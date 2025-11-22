@@ -69,7 +69,7 @@ public class TutorialManager : MonoBehaviour
         FindFirstObjectByType<CameraController>().OnZoomToggled.RemoveListener(AdvanceTutorial);
         FindFirstObjectByType<PlayerControls>().ClickDetected.RemoveListener(AdvanceTutorial);
         FindFirstObjectByType<PlayerControls>().canFire = true;
-        clickText.gameObject.SetActive(false);
+        //clickText.gameObject.SetActive(false);
 
         // Set up listeners based on advance action
         switch (currentState.advanceAction)
@@ -78,20 +78,25 @@ public class TutorialManager : MonoBehaviour
                 // Ensure cannon firing is disabled
                 FindFirstObjectByType<PlayerControls>().canFire = false;
                 FindFirstObjectByType<PlayerControls>().ClickDetected.AddListener(AdvanceTutorial);
-                clickText.gameObject.SetActive(true);
+                //clickText.gameObject.SetActive(true);
+                clickText.text = "Click to continue...";
                 break;
             case AdvanceAction.Score:
                 // Advance when player scores a point
                 FindFirstObjectByType<PointManager>().OnScorePoint.AddListener(AdvanceTutorial);
+                clickText.text = "Score to continue...";
                 break;
             case AdvanceAction.Zoom:
                 // Wait for a zoom to advance
                 FindFirstObjectByType<CameraController>().OnZoomToggled.AddListener(AdvanceTutorial);
+                clickText.text = "Zoom to continue...";
                 break;
             default:
                 Debug.LogWarning("Unknown advance action.");
                 break;
         }
+
+        
 
         // Disable or enable player movement based on state
         FindFirstObjectByType<PauseManager>().SetPause(!currentState.allowMovement, false);
@@ -145,19 +150,23 @@ public class TutorialManager : MonoBehaviour
             case FocusTarget.Cannon:
                 {
                     screenPos = Camera.main.WorldToScreenPoint(FindFirstObjectByType<FireBall>().transform.position);
-                    RectTransform rectTransform = gameObject.GetComponent<RectTransform>();
                     break;
                 }
             case FocusTarget.Target:
                 {
                     screenPos = Camera.main.WorldToScreenPoint(FindFirstObjectByType<CollisionCheck>().transform.position);
-                    RectTransform rectTransform = gameObject.GetComponent<RectTransform>();
                     Debug.Log("Target screen position: " + screenPos);
                     break;
                 }
             case FocusTarget.UIElement:
                 {
                     screenPos = GameObject.FindGameObjectWithTag(tutorialStates[currentStateIndex].uiElement.ToString()).GetComponent<RectTransform>().position;
+                    screenPos += new Vector3(tutorialStates[currentStateIndex].focusPointOffset.x, tutorialStates[currentStateIndex].focusPointOffset.y);
+                    break;
+                }
+            case FocusTarget.GuideLine:
+                {
+                    screenPos = Camera.main.WorldToScreenPoint(GameObject.FindGameObjectWithTag("GuideLine").transform.position);
                     screenPos += new Vector3(tutorialStates[currentStateIndex].focusPointOffset.x, tutorialStates[currentStateIndex].focusPointOffset.y);
                     break;
                 }

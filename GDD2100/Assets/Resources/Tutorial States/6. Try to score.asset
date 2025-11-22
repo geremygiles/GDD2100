@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1624195a47a920247aedc3215ff33a50, type: 3}
-  m_Name: 6. Score Info
+  m_Name: 6. Try to score
   m_EditorClassIdentifier: 
   loadMode: 0
   delay: 2
-  advanceAction: 0
-  allowMovement: 0
-  text: You can see your current grade and accuracy here.
+  advanceAction: 1
+  allowMovement: 1
+  text: Try to score a point!
   textXPosition: 0
-  textYPosition: 0
-  focusTarget: 4
-  uiElement: 2
-  focusPointOffset: {x: 50, y: 0}
-  focusPointRadius: 500
+  textYPosition: 300
+  focusTarget: 1
+  uiElement: 0
+  focusPointOffset: {x: 0, y: 0}
+  focusPointRadius: 10000
